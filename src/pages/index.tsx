@@ -1,5 +1,7 @@
+import { withLayout } from '@/layouts/layout';
+
 const Home = () => {
 	return <>Hello Start-Up</>;
 };
 
-export default Home;
+export default withLayout(Home);
