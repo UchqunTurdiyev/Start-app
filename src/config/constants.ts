@@ -141,6 +141,22 @@ export const CategoryCarousel = {
 	},
 };
 
+export const courseCarousel = {
+	superLargeDesktop: {
+		// the naming can be any, depends on you.
+		breakpoint: { max: 4000, min: 768 },
+		items: 3,
+	},
+	tablet: {
+		breakpoint: { max: 768, min: 640 },
+		items: 2,
+	},
+	mobile: {
+		breakpoint: { max: 460, min: 0 },
+		items: 1,
+	},
+};
+
 export const trustedCompeny = [AiFillAmazonCircle, SiAmd, SiCisco, FaApplePay, SiLogitech, SiSpotify];
 
 export const language = [
