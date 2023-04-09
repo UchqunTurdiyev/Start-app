@@ -1,7 +1,7 @@
 import { withLayout } from '@/layouts/layout';
 
 const Home = () => {
-	return <>Hello Start-Up</>;
+	return <>Home</>;
 };
 
 export default withLayout(Home);

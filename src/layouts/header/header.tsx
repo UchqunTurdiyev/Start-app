@@ -18,14 +18,24 @@ import React from 'react';
 import { BsFillMoonFill, BsFillSunFill, BsTranslate } from 'react-icons/bs';
 import { BiUserCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { MdOutlineContactSupport } from 'react-icons/md';
+import { HeaderProps } from './header.props';
 
-function Header() {
+function Header({ onToggle }: HeaderProps) {
 	const { toggleColorMode, colorMode } = useColorMode();
 	return (
-		<Box w={'full'} h={'10vh'} px={'10'} borderBottom={'1px'} borderBottomColor={useColorModeValue('gray.200', 'gray.700')}>
+		<Box
+			w={'full'}
+			h={'10vh'}
+			px={'10'}
+			pos={'fixed'}
+			top={'0'}
+			left={'0'}
+			borderBottom={'1px'}
+			borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+		>
 			<Flex h={'full'} justify={'space-between'} align={'center'}>
 				<HStack>
-					<Icon as={BiMenuAltLeft} w={6} h={6} cursor={'pointer'} />
+					<Icon onClick={onToggle} as={BiMenuAltLeft} w={6} h={6} cursor={'pointer'} />
 					<Link href={'/'}>{colorMode == 'light' ? <DarkLogo /> : <LightLogo />}</Link>
 				</HStack>
 				<HStack>
