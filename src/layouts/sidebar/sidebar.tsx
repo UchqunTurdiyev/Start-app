@@ -10,6 +10,7 @@ function Sidebar({ toggle }: SidebarProps): JSX.Element {
 	const router = useRouter();
 	return (
 		<Box
+			zIndex={99}
 			w={{ base: 'full', lg: '300px' }}
 			h={'90vh'}
 			bg={useColorModeValue('gray.50', 'gray.900')}
@@ -28,13 +29,13 @@ function Sidebar({ toggle }: SidebarProps): JSX.Element {
 			transition={'all .4s ease'}
 		>
 			<Container maxW={'container.xl'}>
-				{navigation.map(item => (
-					<Box key={item.title} mt={'10'}>
+				{navigation.map((item, idx) => (
+					<Box key={idx} mt={'10'}>
 						<Text>{item.title}</Text>
-						{item.links.map(nav => {
+						{item.links.map((nav, idx) => {
 							const active = router.asPath == nav.route;
 							return (
-								<Link href={`${nav.route}`}>
+								<Link href={`${nav.route}`} key={idx}>
 									<Button
 										colorScheme={'facebook'}
 										variant={active ? 'solid' : 'ghost'}

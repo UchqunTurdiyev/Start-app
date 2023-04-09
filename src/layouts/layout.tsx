@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { LayoutProps } from './layout.props';
 import React, { FunctionComponent, useState } from 'react';
 import Header from './header/header';
@@ -13,7 +13,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
 			<Header onToggle={onToggle} />
 			<Sidebar toggle={toggle} />
 			<Box mt={'11vh'} pl={{ base: 0, lg: '320px' }} transition={'all .4s ease'}>
-				{children}
+				<Container maxW={'container.lg'}>{children}</Container>
 			</Box>
 		</Box>
 	);
