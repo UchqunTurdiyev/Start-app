@@ -32,8 +32,8 @@ import {
 	TeachVal3Icon,
 	TurkIcon,
 	UzbIcons,
-} from 'src/icons';
-import { CourseType } from 'src/interfaces/course.interface';
+} from '../icons';
+import { CourseType } from '../interfaces/course.interfaces';
 import { Icon } from '@chakra-ui/react';
 
 export const navigation = [
@@ -121,41 +121,6 @@ export const categories = [
 		icon: LaptopIcons,
 	},
 ];
-export const CategoryCarousel = {
-	superLargeDesktop: {
-		// the naming can be any, depends on you.
-		breakpoint: { max: 4000, min: 3000 },
-		items: 5,
-	},
-	desktop: {
-		breakpoint: { max: 3000, min: 1024 },
-		items: 3,
-	},
-	tablet: {
-		breakpoint: { max: 1024, min: 464 },
-		items: 2,
-	},
-	mobile: {
-		breakpoint: { max: 464, min: 0 },
-		items: 1,
-	},
-};
-
-export const courseCarousel = {
-	superLargeDesktop: {
-		// the naming can be any, depends on you.
-		breakpoint: { max: 4000, min: 768 },
-		items: 3,
-	},
-	tablet: {
-		breakpoint: { max: 768, min: 640 },
-		items: 2,
-	},
-	mobile: {
-		breakpoint: { max: 460, min: 0 },
-		items: 1,
-	},
-};
 
 export const trustedCompeny = [AiFillAmazonCircle, SiAmd, SiCisco, FaApplePay, SiLogitech, SiSpotify];
 
@@ -220,7 +185,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/3gf746AKRbWNjB8OCoEB',
 		title: 'JavaScript full course',
-		slug: 'javascript',
+		// slug: 'javascript',
 		lessonCount: 96,
 		totalHour: 13.6,
 		level: 'Beginner',
@@ -235,7 +200,7 @@ export const courses: CourseType[] = [
 	},
 	{
 		image: 'https://media.graphassets.com/54vR0DStGoFuZBVkFwWQ',
-		slug: 'vuejs',
+		// slug: 'vuejs',
 		title: 'VueJS full course',
 		lessonCount: 30,
 		totalHour: 10.6,
@@ -252,7 +217,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/65rcPxsLT9ysJDisXF80',
 		title: 'ReactJS full course',
-		slug: 'reactjs',
+		// slug: 'reactjs',
 		lessonCount: 70,
 		totalHour: 19,
 		level: 'Beginner',
@@ -267,7 +232,7 @@ export const courses: CourseType[] = [
 	},
 	{
 		image: 'https://media.graphassets.com/xactyo8TtyTIkAcMWvSm',
-		slug: 'vuex',
+		// slug: 'vuex',
 		title: 'VueX full course',
 		lessonCount: 120,
 		totalHour: 24.6,
@@ -284,7 +249,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/Ql2hDpJhQsaBT3inNuZ4',
 		title: 'Redux full course',
-		slug: 'redux',
+		// slug: 'redux',
 		lessonCount: 39,
 		totalHour: 8.2,
 		level: 'Beginner',
@@ -300,7 +265,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/mDcwhbguQpyM74jb18M5',
 		title: 'NodeJS full course',
-		slug: 'nodejs',
+		// slug: 'nodejs',
 		lessonCount: 56,
 		totalHour: 20.6,
 		level: 'Beginner',

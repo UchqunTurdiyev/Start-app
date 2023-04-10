@@ -2,12 +2,12 @@ import React from 'react';
 import SectionTitle from '../section-title/section-title';
 import { CourseType } from '@/interfaces/course.interfaces';
 import Carousel from 'react-multi-carousel';
-import { courseCarousel } from '@/config/constants';
 import { Divider, Flex, HStack, Heading, Icon, Image, Stack, Text } from '@chakra-ui/react';
 import ReactStars from 'react-stars';
 import { CiViewList } from 'react-icons/ci';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
+import { courseCarousel } from '@/config/carousel';
 
 const PopularCourse = () => {
 	return (
