@@ -1,13 +1,12 @@
-import React from 'react';
 import SectionTitle from "@/components/section-title/section-title";
 import {Box, Flex, Grid, GridItem, Heading, HStack, Icon, Image, Stack, Text} from "@chakra-ui/react";
 import {FaUserGraduate} from "react-icons/fa";
-import {AiOutlinePaperClip} from "react-icons/all";
+import {AiOutlinePlayCircle} from "react-icons/all";
 import Link from "next/link";
 
 const Instruktors = () => {
 	return <>
-		<SectionTitle title={'Learn from the best instructors'} subtitle={'All our mentor with high experience'} />
+	<SectionTitle textAlign={'center'} title={'Learn from the best instructors'} subtitle={'All our mentor with high experience'} />
 
 		<Grid gap={3} gridTemplateColumns={'repeat(4, 1fr)'} mt={5}>
 			{data.map((item, idx) => (
@@ -23,21 +22,20 @@ const Instruktors = () => {
 								<Icon as={FaUserGraduate} />
 								<Text>{item.students} students</Text>
 							</Flex>
-                            <Flex align={'center'} gap={1}>
-								<Icon as={AiOutlinePaperClip} />
-								{item.courses} courses
+							<Flex align={'center'} gap={1}>
+								<Icon as={AiOutlinePlayCircle} />
+								<Text>{item.courses}</Text>
 							</Flex>
 						</HStack>
 					</Stack>
 				</GridItem>
 			))}
- 		</Grid>
-		<Text textAlign={'center'}>Want to help people learn, grow and achieve more in life? <Box as={"span"} color={'teal'} _hover={{textDecoration: 'underline'}}><Link href={'/become-instructor'}>Become an instructor</Link></Box></Text>
+		</Grid>
+		<Text align={"center"}>Want to help people learn, grow and achieve more in life? <Box as={'span'} color={'teal.600'} _hover={{textDecoration: 'underline'}}><Link href={'/become-instructor'}>Become an instructor</Link></Box></Text>
 	</>;
 };
 
 export default Instruktors;
-
 
 const data = [
 	{

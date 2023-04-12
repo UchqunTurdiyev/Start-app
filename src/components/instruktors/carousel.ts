@@ -18,7 +18,6 @@ export const CategoryCarousel = {
     },
 };
 
-
 export const courseCarousel = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -35,11 +34,10 @@ export const courseCarousel = {
     },
 };
 
-
-export const testimonalCarousel = {
+export const testimonalsCarousel = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
         breakpoint: { max: 4000, min: 0 },
-        items: 3,
+        items: 1,
     },
-}
+};

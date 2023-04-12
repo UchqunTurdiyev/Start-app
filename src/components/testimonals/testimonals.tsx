@@ -1,38 +1,28 @@
-import { Center, Icon, Text } from '@chakra-ui/react';
-import Carousel from 'react-multi-carousel';
-import SectionTitle from '../section-title/section-title';
-import { ImQuotesRight } from 'react-icons/im';
-import { testimonialsCarousel } from 'src/config/carousel';
-import { useTranslation } from 'react-i18next';
-const Testimonials = () => {
-	const { t } = useTranslation();
+import React from 'react';
+import SectionTitle from "@/components/section-title/section-title";
+import Carousel from "react-multi-carousel";
+import {testimonalsCarousel} from "@/components/instruktors/carousel";
+import {Center, Icon, Text} from "@chakra-ui/react";
+import {ImQuotesRight} from "react-icons/all";
 
-	return (
-		<>
-			<SectionTitle
-				textAlign={'center'}
-				title={t('testimonials_title', { ns: 'home' })}
-				subtitle={t('testimonials_description', { ns: 'home' })}
-			/>
+const Testimonals = () => {
+	return <>
+		{/*eslint-disable-next-line*/}
+	 <SectionTitle textAlign='center' title={'Testimonials'} subtitle={'What people say about our platform'} />
 
-			<Carousel responsive={testimonialsCarousel} arrows={true} showDots={false} infinite>
-				{data.map((item, idx) => (
-					<Center key={idx} flexDirection={'column'} maxW={'container.sm'} mx={'auto'}>
-						<Icon as={ImQuotesRight} fontSize={100} />
-						<Text mt={5} textAlign={'center'}>
-							{item.description}
-						</Text>
-						<Text fontSize={'xl'} fontWeight={'bolf'} mt={3}>
-							{item.name}
-						</Text>
-					</Center>
-				))}
-			</Carousel>
-		</>
-	);
+         <Carousel responsive={testimonalsCarousel} arrows={true} showDots={false} infinite>
+			 {data.map((item, idx) => (
+				 <Center key={idx} flexDirection={'column'} maxW={'container.sm'} mx={'auto'}>
+					 <Icon as={ImQuotesRight} fontSize={100} />
+					 <Text mt={5} textAlign={'center'}>{item.description}</Text>
+					 <Text fontSize={'xl'} fontWeight={'bold'} mt={3} color={'gray.600'}>{item.name}</Text>
+				 </Center>
+			 ))}
+		 </Carousel>
+	</>;
 };
 
-export default Testimonials;
+export default Testimonals;
 
 const data = [
 	{

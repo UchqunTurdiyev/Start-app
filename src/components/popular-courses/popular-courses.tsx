@@ -7,7 +7,7 @@ import ReactStars from 'react-stars';
 import { CiViewList } from 'react-icons/ci';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
-import { courseCarousel } from '@/config/carousel';
+import {courseCarousel} from "@/components/instruktors/carousel";
 
 const PopularCourse = () => {
 	return (
