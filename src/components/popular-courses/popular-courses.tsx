@@ -7,7 +7,7 @@ import ReactStars from 'react-stars';
 import { CiViewList } from 'react-icons/ci';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
-import {courseCarousel} from "@/components/instruktors/carousel";
+import { courseCarousel } from '@/config/carousel';
 
 const PopularCourse = () => {
 	return (
@@ -16,7 +16,7 @@ const PopularCourse = () => {
 			<Carousel responsive={courseCarousel} arrows={true} showDots={false} autoPlay={true} autoPlaySpeed={3000} infinite>
 				{data.map(item => (
 					<Stack key={item.title} spacing={3} p={3} cursor={'pointer'}>
-						<Image src={item.image} alt={item.title} objectFit={'cover'} h={'210px'} w={'300px'} borderRadius={'lg'} />
+						<Image src={item.image} alt={item.title} objectFit={'cover'} h={'210px'} w={'full'} borderRadius={'lg'} />
 						<HStack>
 							<Text color={'#e59819'}>{item.reviewAvarage.toFixed(1)}</Text>
 							<ReactStars edit={false} value={item.reviewAvarage} color2={'#e59819'} />

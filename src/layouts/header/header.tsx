@@ -24,10 +24,10 @@ function Header({ onToggle }: HeaderProps) {
 	const { toggleColorMode, colorMode } = useColorMode();
 	return (
 		<Box
-			zIndex={99}
+			zIndex={1001}
 			w={'full'}
 			h={'10vh'}
-			px={'10'}
+			px={{ base: '2', md: '5', xl: '10' }}
 			pos={'fixed'}
 			top={'0'}
 			left={'0'}
