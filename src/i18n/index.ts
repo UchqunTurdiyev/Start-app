@@ -1,29 +1,19 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import detector from 'i18next-browser-languagedetector'
+import detector from 'i18next-browser-languagedetector';
+import backend from 'i18next-http-backend';
 
-
-const resources = {
-    en: {
-        translation: {
-            "login": "Login"
-        }
-    },
-    uz: {
-        translation: {
-            "login": "Kirish"
-        }
-    }
-};
 
 i18n
-    .use(initReactI18next) // passes i18n down to react-i18next
+    .use(initReactI18next)
     .use(detector)
+    .use(backend)
     .init({
-        resources,
+        ns: ["layout"],
+        backend: {loadPath: "/locales/{{lng}}/{{ns}}.json"},
         fallbackLng: "en",
         interpolation: {
-            escapeValue: false // react already safes from xss
+            escapeValue: false
         },
         detection: {order: ['cookie', 'localStorage'], caches: ["cookie"]}
     });

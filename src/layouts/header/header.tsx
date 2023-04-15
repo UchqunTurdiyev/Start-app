@@ -66,7 +66,7 @@ function Header({ onToggle }: HeaderProps) {
 						variant={'outline'}
 					/>
 					<Button rightIcon={<BiUserCircle />} colorScheme={'facebook'} variant={'outline'}>
-						 {t('login')}
+						 {t('login', {ns: 'layout'})}
 					</Button>
 				</HStack>
 			</Flex>
