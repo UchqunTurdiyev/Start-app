@@ -1,4 +1,4 @@
-import { DarkLogo, LightLogo, UzbIcons, RusIcons, EngIcons } from '@/icons';
+import { DarkLogo, LightLogo } from '@/icons';
 import {
 	Box,
 	Button,
@@ -19,9 +19,16 @@ import { BsFillMoonFill, BsFillSunFill, BsTranslate } from 'react-icons/bs';
 import { BiUserCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { MdOutlineContactSupport } from 'react-icons/md';
 import { HeaderProps } from './header.props';
+import { language } from '@/config/constants';
+import { useTranslation } from 'react-i18next';
 
 function Header({ onToggle }: HeaderProps) {
 	const { toggleColorMode, colorMode } = useColorMode();
+	const { i18n, t } = useTranslation();
+
+	const onLanguage = (lng: string) => {
+		i18n.changeLanguage(lng);
+	};
 	return (
 		<Box
 			zIndex={1001}
@@ -42,13 +49,13 @@ function Header({ onToggle }: HeaderProps) {
 					<Link href={'/'}>{colorMode == 'light' ? <DarkLogo /> : <LightLogo />}</Link>
 				</HStack>
 				<HStack>
-					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'fasebook'} variant={'ghost'} />
-					<Menu>
+					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'facebook'} variant={'ghost'} />
+					<Menu placement='bottom'>
 						<MenuButton as={IconButton} icon={<BsTranslate />} colorScheme={'facebook'} variant={'solid'} />
-						<MenuList>
-							<MenuItem icon={<UzbIcons />}>UZB</MenuItem>
-							<MenuItem icon={<RusIcons />}>RUS</MenuItem>
-							<MenuItem icon={<EngIcons />}>ENG</MenuItem>
+						<MenuList padding={0} >
+							{language.map(item => (
+								<MenuItem key={item.lng} onClick={() => onLanguage(item.lng)} icon={<item.icon />} backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}>{item.nativeLng}</MenuItem>
+							))}
 						</MenuList>
 					</Menu>
 					<IconButton
@@ -59,7 +66,7 @@ function Header({ onToggle }: HeaderProps) {
 						variant={'outline'}
 					/>
 					<Button rightIcon={<BiUserCircle />} colorScheme={'facebook'} variant={'outline'}>
-						LOGIN
+						 {t('login')}
 					</Button>
 				</HStack>
 			</Flex>

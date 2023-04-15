@@ -10,19 +10,19 @@ const Testimonals = () => {
 		<>
 			{/*eslint-disable-next-line*/}
 			<SectionTitle textAlign='center' title={'Testimonials'} subtitle={'What people say about our platform'} />
-			<Carousel responsive={testimonalsCarousel} arrows={true} showDots={false} infinite>
-				{data.map((item, idx) => (
-					<Center key={idx} flexDirection={'column'} maxW={'container.sm'} mx={'auto'}>
-						<Icon as={ImQuotesRight} fontSize={100} />
-						<Text mt={5} textAlign={'center'}>
-							{item.description}
-						</Text>
-						<Text fontSize={'xl'} fontWeight={'bold'} mt={3} color={'gray.600'}>
-							{item.name}
-						</Text>
-					</Center>
-				))}
-			</Carousel>
+			{/*<Carousel responsive={testimonalsCarousel} arrows={true} showDots={false} infinite>*/}
+			{/*	{data.map((item, idx) => (*/}
+			{/*		<Center key={idx} flexDirection={'column'} maxW={'container.sm'} mx={'auto'}>*/}
+			{/*			<Icon as={ImQuotesRight} fontSize={100} />*/}
+			{/*			<Text mt={5} textAlign={'center'}>*/}
+			{/*				{item.description}*/}
+			{/*			</Text>*/}
+			{/*			<Text fontSize={'xl'} fontWeight={'bold'} mt={3} color={'gray.600'}>*/}
+			{/*				{item.name}*/}
+			{/*			</Text>*/}
+			{/*		</Center>*/}
+			{/*	))}*/}
+			{/*</Carousel>*/}
 		</>
 	);
 };
