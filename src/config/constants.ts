@@ -35,6 +35,7 @@ import {
 } from '../icons';
 import { CourseType } from '../interfaces/course.interfaces';
 import { Icon } from '@chakra-ui/react';
+import React from "react";
 
 export const navigation = [
 	{
@@ -111,7 +112,7 @@ export const categories = [
 		icon: PrintIcons,
 	},
 	{
-		name: 'personl_development_category',
+		name: 'personal_development_category',
 		id: 5,
 		icon: PersonIcons,
 	},

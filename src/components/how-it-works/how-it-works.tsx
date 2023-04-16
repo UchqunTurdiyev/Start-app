@@ -1,16 +1,21 @@
 import React, { Fragment } from 'react';
 import SectionTitle from '@/components/section-title/section-title';
 import { FinishRightIcon, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, RightLineIcon } from '@/icons';
-import { Flex, SimpleGrid, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import {Flex, Icon, SimpleGrid, Stack, Text, useColorModeValue} from '@chakra-ui/react';
+import {howItWorks} from "@/config/constants";
+import {useTranslation} from "react-i18next";
+
 
 const HowItWorks = () => {
+	const {t} = useTranslation()
+
 	const backgroundColor = useColorModeValue('gray.200', 'gray.700');
 	return (
 		<>
-			<SectionTitle textAlign={'center'} title={'How it works?'} subtitle={'10,000+ unique online course list'} />
+			<SectionTitle textAlign={'center'} title={t('how_it_works_title', 'home')} subtitle={t('how_it_works_description')} />
 
 			<SimpleGrid mt={10} columns={5} spacing={10} alignItems={'center '}>
-				{data.map((item, idx) => {
+				{howItWorks.map((item, idx) => {
 					const odd = idx % 2;
 
 					return (
@@ -25,12 +30,12 @@ const HowItWorks = () => {
 										backgroundColor={backgroundColor}
 										borderRadius={'full'}
 									>
-										{item.icon}
+										<Icon as={item.icon} w={'50px'} h={'50px'}/>
 									</Flex>
-									<Text textAlign={'center'}>{item.title}</Text>
+									<Text textAlign={'center'}>{t(item.title, {ns: 'home'})}</Text>
 								</Stack>
 							) : (
-								<Stack justify={'center'}>{item.icon}</Stack>
+								<Stack justify={'center'}><Icon as={item.icon} w={'142px'} h={'21px'} /></Stack>
 							)}
 						</Fragment>
 					);
@@ -42,10 +47,4 @@ const HowItWorks = () => {
 
 export default HowItWorks;
 
-const data = [
-	{ title: 'Sign Up to Platform', icon: <OnlineCourseIcon /> },
-	{ icon: <RightLineIcon /> },
-	{ title: 'Find Courses', icon: <OnlineLearningIcon /> },
-	{ icon: <FinishRightIcon /> },
-	{ title: 'Learn Relaxing', icon: <OnlineStudentIcon /> },
-];
+

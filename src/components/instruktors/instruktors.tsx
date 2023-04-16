@@ -7,11 +7,11 @@ import Link from 'next/link';
 const Instruktors = () => {
 	return (
 		<>
-			<SectionTitle
-				textAlign={'center'}
-				title={'Learn from the best instructors'}
-				subtitle={'All our mentor with high experience'}
-			/>
+			{/*<SectionTitle*/}
+			{/*	textAlign={'center'}*/}
+			{/*	title={'Learn from the best instructors'}*/}
+			{/*	subtitle={'All our mentor with high experience'}*/}
+			{/*/>*/}
 
 			{/*<Grid gap={3} gridTemplateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(4, 1fr)' }} mt={5}>*/}
 			{/*	{data.map((item, idx) => (*/}
@@ -39,7 +39,7 @@ const Instruktors = () => {
 			<Text align={'center'}>
 				Want to help people learn, grow and achieve more in life?{' '}
 				<Box as={'span'} color={'teal.600'} _hover={{ textDecoration: 'underline' }}>
-					{/* <Link href={'/become-instructor'}>Become an instructor</Link> */}
+					 <Link href={'/become-instructor'}>Become an instructor</Link>
 				</Box>
 			</Text>
 		</>

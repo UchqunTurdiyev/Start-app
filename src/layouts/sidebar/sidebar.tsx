@@ -35,7 +35,7 @@ function Sidebar({ toggle }: SidebarProps): JSX.Element {
 			<Container maxW={'container.xl'}>
 				{navigation.map((item, idx) => (
 					<Box key={idx} mt={'10'}>
-						<Text>{t(item.title)}</Text>
+						<Text>{t(item.title, {ns: 'layout'})}</Text>
 						{item.links.map((nav, idx) => {
 							const active = router.asPath == nav.route;
 							return (
@@ -50,7 +50,7 @@ function Sidebar({ toggle }: SidebarProps): JSX.Element {
 									>
 										<HStack gap={2}>
 											<Icon as={nav.icon} />
-											<Text>{t(nav.label)}</Text>
+											<Text>{t(nav.label, {ns: 'layout'})}</Text>
 										</HStack>
 									</Button>
 								</Link>

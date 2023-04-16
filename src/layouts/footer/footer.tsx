@@ -2,8 +2,10 @@ import { Box, Flex, IconButton, Text, useColorModeValue } from '@chakra-ui/react
 import React from 'react';
 import { FaInstagram, FaTelegram, FaYoutube } from 'react-icons/fa';
 import { format } from 'date-fns';
+import {useTranslation} from "react-i18next";
 
 const Footer = () => {
+	const {t} = useTranslation()
 	return (
 		<Box
 			pl={{ base: 0, lg: '320px' }}
@@ -16,7 +18,7 @@ const Footer = () => {
 			h={'10vh'}
 		>
 			<Flex justify={'space-between'} align={'center'} h={'full'}>
-				<Text>&#169; {format(new Date(), 'yyyy')} Uchqun All Right Reserved.</Text>
+				<Text>&#169; {format(new Date(), 'yyyy')} {t('footer', {ns: 'layout'})}</Text>
 				<Flex gap={3} mr={10}>
 					<IconButton icon={<FaTelegram />} colorScheme={'facebook'} variant={'outline'} aria-label={'telegram'} />
 					<IconButton icon={<FaInstagram />} colorScheme={'facebook'} variant={'outline'} aria-label={'instagram'} />

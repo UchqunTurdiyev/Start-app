@@ -2,8 +2,10 @@ import { Button, Card, CardBody, Grid, Heading, Icon, Stack, Text } from '@chakr
 import React from 'react';
 import { FaJava } from 'react-icons/fa';
 import { VscDebugStart } from 'react-icons/vsc';
+import {useTranslation} from "react-i18next";
 
 function Hero() {
+	const {t} = useTranslation()
 	return (
 		<Card mt={10}>
 			<CardBody p={10}>
@@ -15,14 +17,14 @@ function Hero() {
 					alignContent={'center'}
 				>
 					<Stack spacing={3}>
-						<Heading>Find A Perfect Online Course</Heading>
-						<Text>You can access 7900+ different courses from 600 professional trainers for free</Text>
+						<Heading>{t('hero_title', {ns: 'home'})}</Heading>
+						<Text>{t('hero_description', {ns: 'home'})}</Text>
 						<Grid gridTemplateColumns={{ base: '100%', md: '50% 50%' }} gap={5}>
 							<Button h={14} colorScheme={'facebook'} rightIcon={<VscDebugStart />}>
-								Start Learning
+								{t('hero_start_learning_btn', {ns: 'home'})}
 							</Button>
 							<Button h={14} colorScheme={'facebook'} variant={'outline'}>
-								Become Instructor
+								{t('hero_become_instructor_btn', {ns: 'home'})}
 							</Button>
 						</Grid>
 					</Stack>
