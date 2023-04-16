@@ -15,7 +15,8 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
-import { BsFillMoonFill, BsFillSunFill, BsTranslate } from 'react-icons/bs';
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
+import {TbWorld} from 'react-icons/tb'
 import { BiUserCircle, BiMenuAltLeft } from 'react-icons/bi';
 import { MdOutlineContactSupport } from 'react-icons/md';
 import { HeaderProps } from './header.props';
@@ -51,7 +52,9 @@ function Header({ onToggle }: HeaderProps) {
 				<HStack>
 					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'facebook'} variant={'ghost'} />
 					<Menu placement='bottom'>
-						<MenuButton as={IconButton} icon={<BsTranslate />} colorScheme={'facebook'} variant={'solid'} />
+						<MenuButton as={Button} rightIcon={<TbWorld />} textTransform={'capitalize'} colorScheme={'facebook'} variant={'solid'}>
+							{i18n.resolvedLanguage}
+						</MenuButton>
 						<MenuList padding={0} >
 							{language.map(item => (
 								<MenuItem key={item.lng} onClick={() => onLanguage(item.lng)} icon={<item.icon />} backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}>{item.nativeLng}</MenuItem>
