@@ -6,3 +6,4 @@ export { default as Newsletter } from './newsletter/newsletter';
 export { default as PopularCourse } from './popular-courses/popular-courses';
 export { default as Sposorship } from './sposorship/sposorship';
 export { default as Testimonals } from './testimonals/testimonals';
+export { default as AllCoursesCard } from './all-courses-card/all-courses-card';

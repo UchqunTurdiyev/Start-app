@@ -52,7 +52,7 @@ function Header({ onToggle }: HeaderProps) {
 				<HStack>
 					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'facebook'} variant={'ghost'} />
 					<Menu placement='bottom'>
-						<MenuButton as={Button} rightIcon={<TbWorld />} textTransform={'capitalize'} colorScheme={'facebook'} variant={'solid'}>
+						<MenuButton as={Button} rightIcon={<TbWorld />} textTransform={'capitalize'} colorScheme={'facebook'} variant={'outline'}>
 							{i18n.resolvedLanguage}
 						</MenuButton>
 						<MenuList padding={0} >
@@ -68,7 +68,7 @@ function Header({ onToggle }: HeaderProps) {
 						colorScheme={'facebook'}
 						variant={'outline'}
 					/>
-					<Button rightIcon={<BiUserCircle />} colorScheme={'facebook'} variant={'outline'}>
+					<Button rightIcon={<BiUserCircle />} colorScheme={'facebook'} variant={'solid'}>
 						 {t('login', {ns: 'layout'})}
 					</Button>
 				</HStack>
