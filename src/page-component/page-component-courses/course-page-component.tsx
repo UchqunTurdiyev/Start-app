@@ -21,16 +21,19 @@ import { courses, coursesFilter } from '@/config/constants';
 import ReactStars from 'react-stars';
 import { FilterItemProps } from './course-component-page.props';
 import { AllCoursesCard } from '@/components';
+import {useTranslation} from "react-i18next";
 
 function CoursePageComponent() {
+	const {t} = useTranslation();
+
 	// @ts-ignore
 	return (
 		<>
-			<SectionTitle title={'All courses'} subtitle={'Write an introductory description of the category.'} />
+			<SectionTitle title={t('title', {ns: 'course'})} subtitle={t('description', {ns: 'course'})} />
 			<Box pos={'relative'}>
-				<Input h={14} w={'full'} bg={'white'} color={'gray.900'} placeholder='Search..' _placeholder={{ color: 'gray.500' }} />
+				<Input h={14} w={'full'} bg={'white'} color={'gray.900'} placeholder={t('search_input_placeholder', {ns: 'course'}) || ''} _placeholder={{ color: 'gray.500' }} />
 				<Button colorScheme={'facebook'} pos={'absolute'} top={2} right={2} zIndex={999}>
-					Search
+					{t('search_input_btn', {ns: 'course'}) || ''}
 				</Button>
 			</Box>
 			<Flex mt={5} gap={5} direction={{base: 'column', lg:'row'}}>
@@ -59,13 +62,15 @@ function CoursePageComponent() {
 export default CoursePageComponent;
 
 const FilterItem = ({ item, idx }: { item: FilterItemProps; idx: number }) => {
+	const {t} = useTranslation();
+
 	const renderFilter = () => (
 		<>
 			{item.categoryList.map(c => (
 				<Radio key={c.id} value={c.id} colorScheme={'facebook'}>
 					<Flex>
 						{item.id == 'rating' && <ReactStars value={Number(c.id)} edit={false} color2={'#e59819'} />}
-						{c.name}
+						{t(c.name, {ns: 'course'})}
 					</Flex>
 				</Radio>
 			))}
@@ -76,7 +81,7 @@ const FilterItem = ({ item, idx }: { item: FilterItemProps; idx: number }) => {
 			<AccordionItem borderTop={'none'}>
 				<AccordionButton>
 					<Text fontSize={'xl'} flex='1' textAlign='left'>
-						{item.title}
+						{t(item.title, {ns: 'course'})}
 					</Text>
 					<AccordionIcon />
 				</AccordionButton>

@@ -9,7 +9,7 @@ i18n
     .use(detector)
     .use(backend)
     .init({
-        ns: ["layout", "home"],
+        ns: ["layout", "home", 'course'],
         backend: {loadPath: "/locales/{{lng}}/{{ns}}.json"},
         fallbackLng: "en",
         interpolation: {
