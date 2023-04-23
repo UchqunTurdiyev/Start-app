@@ -4,6 +4,7 @@ import { Divider, Flex, Heading, HStack, Icon, Image, Stack, Text } from '@chakr
 import { CiViewList } from 'react-icons/ci';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
+// @ts-ignore
 import { ReactStars } from 'react-stars';
 
 function PopularCourseCard({ item }: PopularCourseCardProps) {
