@@ -4,10 +4,13 @@ import {Box, Button, Flex, Grid, HStack, Image, Stack, Text, useColorModeValue} 
 import {booksCategory} from "@/config/constants";
 import {AiFillShopping} from "react-icons/ai";
 import {motion} from 'framer-motion';
+import {useTranslation} from "react-i18next";
+import books from "@/pages/books";
 
 function BooksPageComponent() {
     const [filter, setFilter] = useState<string>('');
     const backgroundColor = useColorModeValue('gray.200', 'gray.900');
+    const {t} = useTranslation()
 
     const filteredDate = useCallback(() => {
         switch (filter){
@@ -30,10 +33,10 @@ function BooksPageComponent() {
     }, [filter]);
     return (
         <Box mb={20}>
-         <SectionTitle title={'Interesting books'} subtitle={'You like reading, great! This place especially for you'} textAlign={'center'} pt={4} />
+         <SectionTitle title={t('title', {ns: 'books'})} subtitle={t('description', {ns: 'books'})} textAlign={'center'} pt={4} />
           <Flex justify={'center'} mt={5} flexWrap={'wrap'}>
               {booksCategory.map((item, idx) => (
-                  <Button key={item.id} colorScheme={'facebook'} variant={filter == item.id ? 'solid' : 'outline'} onClick={() => setFilter(item.id )} borderRadius={0} borderLeftRadius={idx == 0 ? 'md' : 0} borderRightRadius={booksCategory.length - 1 === idx ? 'md' : 0}>{item.label }</Button>
+                  <Button key={item.id} colorScheme={'facebook'} variant={filter == item.id ? 'solid' : 'outline'} onClick={() => setFilter(item.id )} borderRadius={0} borderLeftRadius={idx == 0 ? 'md' : 0} borderRightRadius={booksCategory.length - 1 === idx ? 'md' : 0}>{t(item.label, {ns: 'books'})}</Button>
               ))}
           </Flex>
 
