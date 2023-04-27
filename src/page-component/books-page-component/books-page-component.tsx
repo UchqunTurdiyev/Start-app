@@ -1,37 +1,59 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import SectionTitle from "@/components/section-title/section-title";
 import {Box, Button, Flex, Grid, HStack, Image, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {booksCategory} from "@/config/constants";
-import {AiFillShopping} from "react-icons/all";
+import {AiFillShopping} from "react-icons/ai";
+import {motion} from 'framer-motion';
 
 function BooksPageComponent() {
     const [filter, setFilter] = useState<string>('');
     const backgroundColor = useColorModeValue('gray.200', 'gray.900');
 
+    const filteredDate = useCallback(() => {
+        switch (filter){
+            case 'programming':
+                return data.filter(c => c.category === 'programming');
+            case 'design':
+                return data.filter(c => c.category === 'design');
+            case 'business':
+                return data.filter(c => c.category === 'business');
+            case 'history':
+                return data.filter(c => c.category === 'history');
+            case 'writing':
+                return data.filter(c => c.category === 'writing');
+            case 'lifestyle':
+                return data.filter(c => c.category === 'lifestyle');
+
+            default:
+                return data;
+        }
+    }, [filter]);
     return (
-        <>
+        <Box mb={20}>
          <SectionTitle title={'Interesting books'} subtitle={'You like reading, great! This place especially for you'} textAlign={'center'} pt={4} />
-          <Flex justify={'center'} mt={5}>
+          <Flex justify={'center'} mt={5} flexWrap={'wrap'}>
               {booksCategory.map((item, idx) => (
                   <Button key={item.id} colorScheme={'facebook'} variant={filter == item.id ? 'solid' : 'outline'} onClick={() => setFilter(item.id )} borderRadius={0} borderLeftRadius={idx == 0 ? 'md' : 0} borderRightRadius={booksCategory.length - 1 === idx ? 'md' : 0}>{item.label }</Button>
               ))}
           </Flex>
 
-            <Grid gridTemplateColumns={'repeat(3, 1fr)'} rowGap={20} gap={4} mt={5}>
-                {data.map(item => (
-                    <Box key={item.name} pos={'relative'}>
-                        <Image src={item.image} alt={item.name} borderRadius={'lg'} w={'full'} h={'250px'} objectFit={'cover'} />
-                        <HStack pos={'absolute'} minH={'100px'} borderRadius={'lg'} shadow={'dark-lg'} bg={backgroundColor} left={2} right={2} bottom={-10} p={2} justify={'space-between'}>
-                            <Box>
-                                <Text  fontSize={'md'}>{item.name}</Text>
-                                <Text fontWeight={"bold"} fontSize={'2xl'}>{item.price.toLocaleString('en-Us', {style: "currency", currency: 'USD'})}</Text>
-                            </Box>
-                            <Button colorScheme={'facebook'} rightIcon={<AiFillShopping />}>Buy</Button>
-                        </HStack>
-                    </Box>
+            <Grid gridTemplateColumns={{base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)'}} rowGap={20} gap={4} mt={5}>
+                {filteredDate().map(item => (
+                    <motion.div key={item.name} layout>
+                        <Box pos={'relative'}>
+                            <Image src={item.image} alt={item.name} borderRadius={'lg'} w={'full'} h={'250px'} objectFit={'cover'} />
+                            <HStack pos={'absolute'} minH={'100px'} borderRadius={'lg'} shadow={'dark-lg'} bg={backgroundColor} left={2} right={2} bottom={-10} p={2} justify={'space-between'}>
+                                <Box>
+                                    <Text  fontSize={'md'}>{item.name}</Text>
+                                    <Text fontWeight={"bold"} fontSize={'2xl'}>{item.price.toLocaleString('en-Us', {style: "currency", currency: 'USD'})}</Text>
+                                </Box>
+                                <Button colorScheme={'facebook'} rightIcon={<AiFillShopping />}>Buy</Button>
+                            </HStack>
+                        </Box>
+                    </motion.div>
                 ))}
             </Grid>
-        </>
+        </Box>
     );
 }
 
