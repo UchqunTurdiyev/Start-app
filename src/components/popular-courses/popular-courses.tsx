@@ -14,11 +14,11 @@ const PopularCourse = () => {
 				title={t('popular_courses_title', { ns: 'home' })}
 				subtitle={t('popular_courses_description', { ns: 'home' })}
 			/>
-			{/* <Carousel responsive={courseCarousel} arrows={true} showDots={false} autoPlay={true} autoPlaySpeed={3000} infinite>
+			<Carousel responsive={courseCarousel} arrows={true} showDots={false} autoPlay={true} autoPlaySpeed={3000} infinite>
 				{courses.map(item => (
 					<PopularCourseCard item={item} key={item.title} />
 				))}
-			</Carousel> */}
+			</Carousel>
 		</>
 	);
 };

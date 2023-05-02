@@ -13,7 +13,8 @@ function PopularCourseCard({ item }: PopularCourseCardProps) {
 			<Image src={item.image} alt={item.title} objectFit={'cover'} h={'210px'} w={'full'} borderRadius={'lg'} />
 			<HStack>
 				<Text color={'#e59819'}>{item.reviewAvarage.toFixed(1)}</Text>
-				<ReactStars edit={false} value={item.reviewAvarage} color2={'#e59819'} />
+				{/*<ReactStars edit={false} value={item.reviewAvarage} color2={'#e59819'} />*/}
+
 				<Text opacity={'0.8'}>({item.reviewCount})</Text>
 			</HStack>
 			<Heading fontSize={'xl'}>{item.title}</Heading>
