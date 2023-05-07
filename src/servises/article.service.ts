@@ -5,10 +5,10 @@ import { Language } from 'src/interfaces/constants.interface';
 const grapqhlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
 
 export const Articles = {
-	async getArtciles() {
+	async getArtciles(lng: Language) {
 		const query = gql`
-			query Articles {
-				articles {
+			query Articles($lng: Language) {
+				articles(where: { language: $lng }) {
 					createdAt
 					id
 					title
@@ -28,10 +28,12 @@ export const Articles = {
 			}
 		`;
 
-		const result = await request<{articles: ArticleType}>(grapqhlAPI, query);
+		const result = await request<{ articles: ArticleType[] }>(grapqhlAPI, query, {
+			lng,
+		});
 		return result.articles;
 	},
-}
+};
 
 // 	async getDetailedArticle(slug: string) {
 // 		const query = gql`

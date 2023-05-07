@@ -1,3 +1,4 @@
+import { language } from '@/config/constants';
 import { DarkLogo, LightLogo } from '@/icons';
 import {
 	Box,
@@ -14,22 +15,28 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import React from 'react';
-import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
-import {TbWorld} from 'react-icons/tb'
-import { BiUserCircle, BiMenuAltLeft } from 'react-icons/bi';
-import { MdOutlineContactSupport } from 'react-icons/md';
-import { HeaderProps } from './header.props';
-import { language } from '@/config/constants';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { BiMenuAltLeft, BiUserCircle } from 'react-icons/bi';
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
+import { MdOutlineContactSupport } from 'react-icons/md';
+import { TbWorld } from 'react-icons/tb';
+import { HeaderProps } from './header.props';
 
 function Header({ onToggle }: HeaderProps) {
 	const { toggleColorMode, colorMode } = useColorMode();
 	const { i18n, t } = useTranslation();
+	const router = useRouter();
 
+	// const onLanguage = (lng: string) => {
+	// 	// replace ozgartirish uchun routerni
+	// 	router.replace(router.asPath).then(() => i18n.changeLanguage(lng));
+	// };
 	const onLanguage = (lng: string) => {
+		router.replace(router.asPath);
 		i18n.changeLanguage(lng);
 	};
+
 	return (
 		<Box
 			zIndex={1001}
@@ -50,14 +57,32 @@ function Header({ onToggle }: HeaderProps) {
 					<Link href={'/'}>{colorMode == 'light' ? <DarkLogo /> : <LightLogo />}</Link>
 				</HStack>
 				<HStack>
-					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'facebook'} variant={'ghost'} />
+					<IconButton
+						aria-label='support'
+						icon={<MdOutlineContactSupport />}
+						colorScheme={'facebook'}
+						variant={'ghost'}
+					/>
 					<Menu placement='bottom'>
-						<MenuButton as={Button} rightIcon={<TbWorld />} textTransform={'capitalize'} colorScheme={'facebook'} variant={'outline'}>
+						<MenuButton
+							as={Button}
+							rightIcon={<TbWorld />}
+							textTransform={'capitalize'}
+							colorScheme={'facebook'}
+							variant={'outline'}
+						>
 							{i18n.resolvedLanguage}
 						</MenuButton>
-						<MenuList padding={0} >
+						<MenuList padding={0}>
 							{language.map(item => (
-								<MenuItem key={item.lng} onClick={() => onLanguage(item.lng)} icon={<item.icon />} backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}>{item.nativeLng}</MenuItem>
+								<MenuItem
+									key={item.lng}
+									onClick={() => onLanguage(item.lng)}
+									icon={<item.icon />}
+									backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}
+								>
+									{item.nativeLng}
+								</MenuItem>
 							))}
 						</MenuList>
 					</Menu>
@@ -69,7 +94,7 @@ function Header({ onToggle }: HeaderProps) {
 						variant={'outline'}
 					/>
 					<Button rightIcon={<BiUserCircle />} colorScheme={'facebook'} variant={'solid'}>
-						 {t('login', {ns: 'layout'})}
+						{t('login', { ns: 'layout' })}
 					</Button>
 				</HStack>
 			</Flex>
