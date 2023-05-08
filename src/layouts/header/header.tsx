@@ -28,11 +28,8 @@ function Header({ onToggle }: HeaderProps) {
 	const { i18n, t } = useTranslation();
 	const router = useRouter();
 
-	// const onLanguage = (lng: string) => {
-	// 	// replace ozgartirish uchun routerni
-	// 	router.replace(router.asPath).then(() => i18n.changeLanguage(lng));
-	// };
 	const onLanguage = (lng: string) => {
+		// replace ozgartirish uchun routerni
 		router.replace(router.asPath);
 		i18n.changeLanguage(lng);
 	};

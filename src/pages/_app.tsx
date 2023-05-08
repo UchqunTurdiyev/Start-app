@@ -1,3 +1,4 @@
+import i18n from '@/i18n';
 import { ChakraProvider } from '@chakra-ui/react';
 import '@fontsource/roboto';
 import { AppProps } from 'next/app';
@@ -8,7 +9,6 @@ import { useEffect } from 'react';
 import { Client, HydrationProvider } from 'react-hydration-provider';
 import { I18nextProvider } from 'react-i18next';
 import 'react-multi-carousel/lib/styles.css';
-import i18n from 'src/i18n';
 import '../styles/globals.css';
 
 NProgress.configure({ showSpinner: false });
