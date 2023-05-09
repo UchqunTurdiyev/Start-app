@@ -9,6 +9,9 @@ export interface ArticleType {
 	title: string;
 	author: AuthorType;
 	language: string;
+	description: {
+		text: string;
+	};
 }
 
 export interface AuthorType {

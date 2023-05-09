@@ -1,16 +1,14 @@
 import { navigation } from '@/config/constants';
-import { Box, useColorModeValue, Container, Text, Button, HStack, Icon } from '@chakra-ui/react';
-import { log } from 'console';
+import { Box, Button, Container, HStack, Icon, Text, useColorModeValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { SidebarProps } from './sidebar.props';
-import {useTranslation} from "react-i18next";
 
 function Sidebar({ toggle }: SidebarProps): JSX.Element {
 	const router = useRouter();
 
-	const {t } = useTranslation()
+	const { t } = useTranslation();
 
 	return (
 		<Box
@@ -35,9 +33,9 @@ function Sidebar({ toggle }: SidebarProps): JSX.Element {
 			<Container maxW={'container.xl'}>
 				{navigation.map((item, idx) => (
 					<Box key={idx} mt={'10'}>
-						<Text>{t(item.title, {ns: 'layout'})}</Text>
+						<Text>{t(item.title, { ns: 'layout' })}</Text>
 						{item.links.map((nav, idx) => {
-							const active = router.asPath == nav.route;
+							const active = `/${router.pathname.split('/')[1]}` == nav.route;
 							return (
 								<Link href={`${nav.route}`} key={idx}>
 									<Button
@@ -50,7 +48,7 @@ function Sidebar({ toggle }: SidebarProps): JSX.Element {
 									>
 										<HStack gap={2}>
 											<Icon as={nav.icon} />
-											<Text>{t(nav.label, {ns: 'layout'})}</Text>
+											<Text>{t(nav.label, { ns: 'layout' })}</Text>
 										</HStack>
 									</Button>
 								</Link>

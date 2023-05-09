@@ -1,6 +1,6 @@
+import { ArticleType } from '@/interfaces/article.interface';
+import { Language } from '@/interfaces/constants.interfaces';
 import { gql, request } from 'graphql-request';
-import { ArticleType } from 'src/interfaces/article.interface';
-import { Language } from 'src/interfaces/constants.interface';
 
 const grapqhlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
 
@@ -24,13 +24,14 @@ export const Articles = {
 							url
 						}
 					}
+					description {
+						text
+					}
 				}
 			}
 		`;
 
-		const result = await request<{ articles: ArticleType[] }>(grapqhlAPI, query, {
-			lng,
-		});
+		const result = await request<{ articles: ArticleType[] }>(grapqhlAPI, query, { lng });
 		return result.articles;
 	},
 };
