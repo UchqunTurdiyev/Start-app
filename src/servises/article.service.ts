@@ -34,36 +34,34 @@ export const Articles = {
 		const result = await request<{ articles: ArticleType[] }>(grapqhlAPI, query, { lng });
 		return result.articles;
 	},
-};
+	async getDetailedArticle(slug: string) {
+		const query = gql`
+			query DeatiledArticle($slug: String!) {
+				article(where: { slug: $slug }) {
+					createdAt
+					id
+					title
+					excerp
+					slug
+					image {
+						url
+					}
+					language
+					author {
+						name
+						avatar {
+							url
+						}
+					}
+					description {
+						text
+						raw
+					}
+				}
+			}
+		`;
 
-// 	async getDetailedArticle(slug: string) {
-// 		const query = gql`
-// 			query DeatiledArticle($slug: String!) {
-// 				article(where: { slug: $slug }) {
-// 					createdAt
-// 					id
-// 					title
-// 					excerpt
-// 					slug
-// 					image {
-// 						url
-// 					}
-// 					language
-// 					author {
-// 						name
-// 						avatar {
-// 							url
-// 						}
-// 					}
-// 					description {
-// 						text
-// 						raw
-// 					}
-// 				}
-// 			}
-// 		`;
-//
-// 		const result = await request<{ article: ArticleType }>(grapqhlAPI, query, { slug });
-// 		return result.article;
-// 	},
-// };
+		const result = await request<{ article: ArticleType }>(grapqhlAPI, query, { slug });
+		return result.article;
+	},
+};

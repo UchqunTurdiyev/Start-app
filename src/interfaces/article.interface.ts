@@ -11,6 +11,7 @@ export interface ArticleType {
 	language: string;
 	description: {
 		text: string;
+		raw: [];
 	};
 }
 

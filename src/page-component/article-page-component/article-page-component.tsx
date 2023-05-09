@@ -65,7 +65,14 @@ export default function ArticlePageComponent({ articles }: ArticlePageProps) {
 										</Text>
 										<HStack>
 											<Avatar src={item.author.avatar.url} />
-											<Text color={'white'}>{item.author.name}</Text>
+											<Box>
+												<Text color={'white'}>{item.author.name}</Text>
+												<Text color={'gray.500'}>
+													{format(new Date(item.createdAt), 'dd MMM, yyyy')} ·{' '}
+													{calculateEstimatedReadingTime(item.description.text)}
+													{t('read_article', { ns: 'layout' })}
+												</Text>
+											</Box>
 										</HStack>
 									</Stack>
 								</Link>
