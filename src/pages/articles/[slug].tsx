@@ -1,4 +1,5 @@
 import { ArticleType } from '@/interfaces/article.interface';
+import { Language } from '@/interfaces/constants.interfaces';
 import { withLayout } from '@/layouts/layout';
 import { ArticleDetailedComponent } from '@/page-component';
 import { Articles } from '@/servises/article.service';
@@ -12,14 +13,20 @@ export default withLayout(ArticleDetailPage);
 
 export const getServerSideProps: GetServerSideProps<articleDetailedPageProps> = async ({
 	query,
+	req,
 }) => {
-	const article = await Articles.getDetailedArticle(query.slug as string);
+	const slug: string = query.slug as string;
+	const lng: Language = req.cookies.i18next as Language;
+	const article = await Articles.getDetailedArticle(slug);
 
-	return {
-		props: {
-			article,
-		},
-	};
+	if (article.language == lng) {
+		return {
+			props: {
+				article,
+			},
+		};
+	}
+	return { redirect: { destination: '/articles', permanent: false } };
 };
 
 interface articleDetailedPageProps extends Record<string, unknown> {
