@@ -1,21 +1,20 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
 import detector from 'i18next-browser-languagedetector';
 import backend from 'i18next-http-backend';
-
+import { initReactI18next } from 'react-i18next';
 
 i18n
-    .use(initReactI18next)
-    .use(detector)
-    .use(backend)
-    .init({
-        ns: ["layout", "home", 'course', 'books'],
-        backend: {loadPath: "/locales/{{lng}}/{{ns}}.json"},
-        fallbackLng: "en",
-        interpolation: {
-            escapeValue: false
-        },
-        detection: {order: ['cookie', 'localStorage'], caches: ["cookie"]}
-    });
+	.use(initReactI18next)
+	.use(detector)
+	.use(backend)
+	.init({
+		ns: ['layout', 'home', 'course', 'books', 'global'],
+		backend: { loadPath: '/locales/{{lng}}/{{ns}}.json' },
+		fallbackLng: 'en',
+		interpolation: {
+			escapeValue: false,
+		},
+		detection: { order: ['cookie', 'localStorage'], caches: ['cookie'] },
+	});
 
 export default i18n;
