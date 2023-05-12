@@ -1,7 +1,8 @@
 import { withLayout } from '@/layouts/layout';
+import { ContactPageComponent } from '@/page-component';
 
 function Contact() {
-	return <div>Contact</div>;
+	return <ContactPageComponent />;
 }
 
 export default withLayout(Contact);
