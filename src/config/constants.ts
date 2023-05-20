@@ -35,7 +35,7 @@ import {
 } from '../icons';
 import { CourseType } from '../interfaces/course.interfaces';
 import { Icon } from '@chakra-ui/react';
-import React from "react";
+import React from 'react';
 
 export const navigation = [
 	{
@@ -123,7 +123,6 @@ export const categories = [
 	},
 ];
 
-
 export const trustedCompeny = [AiFillAmazonCircle, SiAmd, SiCisco, FaApplePay, SiLogitech, SiSpotify];
 
 export const language = [
@@ -182,7 +181,6 @@ export const coursesFilter = [
 		],
 	},
 ];
-
 
 export const courses: CourseType[] = [
 	{
@@ -305,5 +303,36 @@ export const booksCategory = [
 	{
 		label: 'filter_lifestyle',
 		id: 'lifestyle',
+	},
+];
+
+export const faq = [
+	{
+		question: 'faq_question_1',
+		answer: 'faq_answer_1',
+	},
+	{
+		question: 'faq_question_2',
+		answer: 'faq_answer_2',
+	},
+	{
+		question: 'faq_question_3',
+		answer: 'faq_answer_3',
+	},
+	{
+		question: 'faq_question_4',
+		answer: 'faq_answer_4',
+	},
+	{
+		question: 'faq_question_5',
+		answer: 'faq_answer_5',
+	},
+	{
+		question: 'faq_question_6',
+		answer: 'faq_answer_6',
+	},
+	{
+		question: 'faq_question_7',
+		answer: 'faq_answer_7',
 	},
 ];
