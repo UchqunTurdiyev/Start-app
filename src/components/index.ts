@@ -8,3 +8,7 @@ export { default as Sposorship } from './sposorship/sposorship';
 export { default as Testimonals } from './testimonals/testimonals';
 export { default as AllCoursesCard } from './all-courses-card/all-courses-card';
 export { default as Pricing } from './pricing/pricing';
+export { default as Login } from './login/login';
+export { default as Register } from './register/register';
+export { default as Verefication } from './verefication/verefication';
+export { default as SocialMedia } from './social-media/social-media';

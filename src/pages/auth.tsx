@@ -1,5 +1,7 @@
+import { AuthPageComponent } from '@/page-component';
+
 const AuthPage = () => {
-	return <>Hello</>;
+	return <AuthPageComponent />;
 };
 
 export default AuthPage;

@@ -7,3 +7,4 @@ export { default as CoursePageComponent } from './page-component-courses/course-
 export { default as ContactPageComponent } from './contact-page-component/contact-page-component';
 export { default as PricingPageComponent } from './pricing-page-component/pricing-page-component';
 export { default as FaqPageComponent } from './faq-page-component/faq-page-component';
+export { default as AuthPageComponent } from './auth-page-component/auth-page-component';

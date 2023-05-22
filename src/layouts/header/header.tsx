@@ -54,12 +54,7 @@ function Header({ onToggle }: HeaderProps) {
 					<Link href={'/'}>{colorMode == 'light' ? <DarkLogo /> : <LightLogo />}</Link>
 				</HStack>
 				<HStack>
-					<IconButton
-						aria-label='support'
-						icon={<MdOutlineContactSupport />}
-						colorScheme={'facebook'}
-						variant={'ghost'}
-					/>
+					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'facebook'} variant={'ghost'} />
 					<Menu placement='bottom'>
 						<MenuButton
 							as={Button}
@@ -90,7 +85,7 @@ function Header({ onToggle }: HeaderProps) {
 						colorScheme={'facebook'}
 						variant={'outline'}
 					/>
-					<Button rightIcon={<BiUserCircle />} colorScheme={'facebook'} variant={'solid'}>
+					<Button rightIcon={<BiUserCircle />} onClick={() => router.push('/auth')} colorScheme={'facebook'} variant={'solid'}>
 						{t('login', { ns: 'layout' })}
 					</Button>
 				</HStack>
