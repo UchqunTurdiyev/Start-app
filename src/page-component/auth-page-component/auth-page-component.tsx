@@ -16,22 +16,25 @@ import {
 } from '@chakra-ui/react';
 import { avatars } from '@/config/constants';
 import { Login, Register, SocialMedia, Verefication } from '@/components';
+import { LoginProps } from '@/components/login/login.props';
 
 export default function AuthPageComponent() {
 	const [state, setState] = useState<'login' | 'register' | 'verification'>('login');
 
 	const breakpointValue = useBreakpointValue({ base: 'md', md: 'lg' });
 
+	const onNavigationStateComponent = (component: 'login' | 'register' | 'verification') => setState(component);
 	const renderStateComponent = () => {
 		switch (state) {
 			case 'login':
-				return <Login />;
+				return <Login onNavigationStateComponent={onNavigationStateComponent} />;
 			case 'register':
 				return <Register />;
 			case 'verification':
 				return <Verefication />;
 		}
 	};
+
 	return (
 		<div>
 			<AuthNavbarComponent />
