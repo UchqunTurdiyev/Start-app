@@ -14,7 +14,6 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { LoginProps } from './login.props';
@@ -54,13 +53,17 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 					</InputRightElement>
 				</InputGroup>
 			</FormControl>
-			<HStack>
+			<HStack justify={'space-between'}>
 				<Checkbox colorScheme={'facebook'}>{t('auth_remember_me', { ns: 'global' })}</Checkbox>
-				<Link href={'account-recovery'}>
-					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }}>
-						{t('auth_forgot_password', { ns: 'global' })}
-					</Box>
-				</Link>
+				<Box
+					as={'a'}
+					onClick={() => onNavigationStateComponent('account-recovery')}
+					color={'teal.500'}
+					_hover={{ textDecoration: 'underline' }}
+					cursor={'pointer'}
+				>
+					{t('auth_forgot_password', { ns: 'global' })}
+				</Box>
 			</HStack>
 			<Button
 				mt={4}

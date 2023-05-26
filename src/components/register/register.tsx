@@ -15,8 +15,6 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import Link from 'next/link';
-import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RegisterProps } from './register.props';
 import useShowPassword from '@/hooks/useShowPassword';
@@ -69,13 +67,17 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 					</InputGroup>
 				</FormControl>
 			</Flex>
-			<HStack>
+			<HStack justify={'space-between'}>
 				<Checkbox colorScheme={'facebook'}>{t('register_btn', { ns: 'global' })}</Checkbox>
-				<Link href={'account-recovery'}>
-					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }}>
-						{t('register_btn', { ns: 'global' })}
-					</Box>
-				</Link>
+				<Box
+					as={'a'}
+					onClick={() => onNavigationStateComponent('account-recovery')}
+					cursor={'pointer'}
+					color={'teal.500'}
+					_hover={{ textDecoration: 'underline' }}
+				>
+					{t('register_btn', { ns: 'global' })}
+				</Box>
 			</HStack>
 			<Button
 				mt={4}
