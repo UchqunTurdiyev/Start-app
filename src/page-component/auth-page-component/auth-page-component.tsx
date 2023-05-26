@@ -29,7 +29,7 @@ export default function AuthPageComponent() {
 			case 'login':
 				return <Login onNavigationStateComponent={onNavigationStateComponent} />;
 			case 'register':
-				return <Register />;
+				return <Register onNavigationStateComponent={onNavigationStateComponent} />;
 			case 'verification':
 				return <Verefication />;
 		}
