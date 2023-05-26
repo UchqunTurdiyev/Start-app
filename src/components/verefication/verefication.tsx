@@ -1,7 +1,9 @@
 import { Button, HStack, Heading, PinInput, PinInputField, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Verefication() {
+	const { t } = useTranslation();
 	return (
 		<Stack>
 			<Heading
@@ -9,14 +11,13 @@ export default function Verefication() {
 				lineHeight={1.1}
 				fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}
 			>
-				verification
+				{t('verification_title', { ns: 'global' })}
 				<Text as={'span'} bgGradient='linear(ro-r, gray.400, facebook.400)' bgClip={'text'}>
 					!
 				</Text>
 			</Heading>
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-				We’re looking for amazing engineers just like you! Become a part of our rockstar engineering team and skyrocket your
-				career!
+				{t('verification_description', { ns: 'global' })}
 			</Text>
 			<HStack justify={'center'}>
 				<PinInput otp size={'lg'} colorScheme={'facebook'} focusBorderColor={'facebook.500'}>
@@ -33,7 +34,7 @@ export default function Verefication() {
 				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
 				h={14}
 			>
-				Confirm
+				{t('verification_btn', { ns: 'global' })}
 			</Button>
 		</Stack>
 	);

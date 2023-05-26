@@ -5,6 +5,7 @@ import {
 	AvatarGroup,
 	Box,
 	Container,
+	Flex,
 	Heading,
 	Icon,
 	IconProps,
@@ -17,9 +18,11 @@ import {
 import { avatars } from '@/config/constants';
 import { Login, Register, SocialMedia, Verefication } from '@/components';
 import { LoginProps } from '@/components/login/login.props';
+import { useTranslation } from 'react-i18next';
 
 export default function AuthPageComponent() {
-	const [state, setState] = useState<'login' | 'register' | 'verification'>('verification');
+	const [state, setState] = useState<'login' | 'register' | 'verification'>('login');
+	const { t } = useTranslation();
 
 	const breakpointValue = useBreakpointValue({ base: 'md', md: 'lg' });
 
@@ -48,11 +51,11 @@ export default function AuthPageComponent() {
 				>
 					<Stack spacing={{ base: 10, md: 20 }}>
 						<Heading lineHeight={1.1} fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-							Senior web designers{' '}
+							{t('auth_page_title_1', { ns: 'global' })}{' '}
 							<Text as={'span'} bgGradient='linear(to-r, gray.400, facebook.400'>
 								&
 							</Text>
-							Full-Stack Developers
+							{t('auth_page_title_2', { ns: 'global' })}
 						</Heading>
 						<Stack direction={'row'} spacing={4} align={'center'}>
 							<AvatarGroup>
@@ -79,6 +82,32 @@ export default function AuthPageComponent() {
 									/>
 								))}
 							</AvatarGroup>
+							<Text fontSize={{ base: '4xl', md: '6xl' }}>+</Text>
+							<Flex
+								align={'center'}
+								justify={'center'}
+								fontSize={{ base: 'sm', md: 'lg' }}
+								bg={'gray.800'}
+								color={'white'}
+								rounded={'full'}
+								minWidth={useBreakpointValue({ base: '44px', md: '60px' })}
+								minHeight={useBreakpointValue({ base: '44px', md: '60px' })}
+								position={'relative'}
+								_before={{
+									content: '""',
+									width: 'full',
+									height: 'full',
+									rounded: 'full',
+									transform: 'scale(1.125)',
+									bgGradient: 'linear(to-bl, gray.400,facebook.400)',
+									position: 'absolute',
+									zIndex: -1,
+									top: 0,
+									left: 0,
+								}}
+							>
+								{t('auth_page_you', { ns: 'global' })}
+							</Flex>
 						</Stack>
 					</Stack>
 					<Stack

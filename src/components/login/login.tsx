@@ -18,9 +18,11 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { LoginProps } from './login.props';
+import { useTranslation } from 'react-i18next';
 
 export default function Login({ onNavigationStateComponent }: LoginProps) {
 	const [show, setShow] = useState<boolean>(false);
+	const { t } = useTranslation();
 
 	const toggleShow = () => setShow(prev => !prev);
 
@@ -31,20 +33,20 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 				lineHeight={1.1}
 				fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}
 			>
-				Login
+				{t('login_title', { ns: 'global' })}
 				<Text as={'span'} bgGradient='linear(ro-r, gray.400, facebook.400)' bgClip={'text'}>
 					!
 				</Text>
 			</Heading>
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-				We’re happy to see you again on our platform, for getting more experience please sign in on your account!
+				{t('login_description', { ns: 'global' })}
 			</Text>
 			<FormControl isRequired>
-				<FormLabel>Email address</FormLabel>
+				<FormLabel>{t('login_input_email_label', { ns: 'global' })}</FormLabel>
 				<Input focusBorderColor='facebook.500' type='text' placeholder='example@gmail.com' h={14} />
 			</FormControl>
 			<FormControl isRequired>
-				<FormLabel>Password</FormLabel>
+				<FormLabel>{t('login_input_password_label', { ns: 'global' })}</FormLabel>
 				<InputGroup>
 					<Input focusBorderColor='facebook.500' type={!show ? 'password' : 'text'} placeholder='password' h={14} />
 					<InputRightElement pt={4}>
@@ -53,10 +55,10 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 				</InputGroup>
 			</FormControl>
 			<HStack>
-				<Checkbox colorScheme={'facebook'}>Remember me</Checkbox>
+				<Checkbox colorScheme={'facebook'}>{t('auth_remember_me', { ns: 'global' })}</Checkbox>
 				<Link href={'account-recovery'}>
 					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }}>
-						Forgot Password
+						{t('auth_forgot_password', { ns: 'global' })}
 					</Box>
 				</Link>
 			</HStack>
@@ -68,10 +70,10 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
 				h={14}
 			>
-				Submit
+				{t('login_btn', { ns: 'global' })}
 			</Button>
 			<Text>
-				Not account yet?{' '}
+				{t('login_not_account_yet', { ns: 'global' })}{' '}
 				<Box
 					onClick={() => onNavigationStateComponent('register')}
 					as={'span'}
@@ -79,7 +81,7 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 					cursor={'pointer'}
 					_hover={{ textDecor: 'underline' }}
 				>
-					Register
+					{t('login_redirect_to_register', { ns: 'global' })}
 				</Box>
 			</Text>
 		</Stack>

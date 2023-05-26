@@ -1,8 +1,10 @@
 import { Box, Button, Center, HStack, Text } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 export default function SocialMedia() {
+	const { t } = useTranslation();
 	return (
 		<>
 			<Box
@@ -29,7 +31,7 @@ export default function SocialMedia() {
 				}}
 				textAlign={'center'}
 			>
-				OR
+				{t('or', { ns: 'global' })}
 			</Box>
 			<HStack>
 				<Button w={'full'} colorScheme={'gray'} leftIcon={<FaGithub />}>

@@ -20,9 +20,11 @@ import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RegisterProps } from './register.props';
 import useShowPassword from '@/hooks/useShowPassword';
+import { useTranslation } from 'react-i18next';
 
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
+	const { t } = useTranslation();
 	return (
 		<Stack spacing={4}>
 			<Heading
@@ -30,22 +32,21 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 				lineHeight={1.1}
 				fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}
 			>
-				Register
+				{t('register_title', { ns: 'global' })}
 				<Text as={'span'} bgGradient='linear(ro-r, gray.400, facebook.400)' bgClip={'text'}>
 					!
 				</Text>
 			</Heading>
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-				We’re looking for amazing engineers just like you! Become a part of our rockstar engineering team and skyrocket your
-				career!
+				{t('register_description', { ns: 'global' })}
 			</Text>
 			<FormControl isRequired>
-				<FormLabel>Email address</FormLabel>
+				<FormLabel> {t('register_input_confirm_password_label', { ns: 'global' })}</FormLabel>
 				<Input focusBorderColor='facebook.500' type='text' placeholder='example@gmail.com' h={14} />
 			</FormControl>
 			<Flex gap={4}>
 				<FormControl isRequired>
-					<FormLabel>Password</FormLabel>
+					<FormLabel>{t('register_already_have_account', { ns: 'global' })}</FormLabel>
 					<InputGroup>
 						<Input focusBorderColor='facebook.500' type={!show ? 'password' : 'text'} placeholder='password' h={14} />
 						<InputRightElement pt={4}>
@@ -54,7 +55,7 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 					</InputGroup>
 				</FormControl>
 				<FormControl isRequired>
-					<FormLabel>Confirm Password</FormLabel>
+					<FormLabel>{t('register_redirect_to_login', { ns: 'global' })}</FormLabel>
 					<InputGroup>
 						<Input focusBorderColor='facebook.500' type={!showConfirm ? 'password' : 'text'} placeholder='****' h={14} />
 						<InputRightElement pt={4}>
@@ -69,10 +70,10 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 				</FormControl>
 			</Flex>
 			<HStack>
-				<Checkbox colorScheme={'facebook'}>Remember me</Checkbox>
+				<Checkbox colorScheme={'facebook'}>{t('register_btn', { ns: 'global' })}</Checkbox>
 				<Link href={'account-recovery'}>
 					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }}>
-						Forgot Password
+						{t('register_btn', { ns: 'global' })}
 					</Box>
 				</Link>
 			</HStack>
