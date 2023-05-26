@@ -19,7 +19,7 @@ import { Login, Register, SocialMedia, Verefication } from '@/components';
 import { LoginProps } from '@/components/login/login.props';
 
 export default function AuthPageComponent() {
-	const [state, setState] = useState<'login' | 'register' | 'verification'>('login');
+	const [state, setState] = useState<'login' | 'register' | 'verification'>('verification');
 
 	const breakpointValue = useBreakpointValue({ base: 'md', md: 'lg' });
 
