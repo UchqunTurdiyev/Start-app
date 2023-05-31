@@ -6,13 +6,27 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
 import { BsMinecartLoaded } from 'react-icons/all';
 import { AllCoursesCardProps } from './all-courses-card.props';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 function AllCoursesCard({ course }: AllCoursesCardProps) {
+	const router = useRouter();
+
+	const onDetailedCourse = () => router.push(`/courses/${course.slug}`);
 	return (
 		<>
 			<HStack py={4}>
-				<Flex gap={4} w={'100%'} direction={{base: 'column', md: 'row'}}>
-					<Image src={course.image} alt={course.title} w={{base: '100%', md: '250px'}} h={{base: '300px', md: '250px'}} borderRadius={'lg'} objectFit={'cover'} />
+				<Flex gap={4} w={'100%'} direction={{ base: 'column', md: 'row' }}>
+					<Image
+						src={course.image}
+						alt={course.title}
+						w={{ base: '100%', md: '250px' }}
+						h={{ base: '300px', md: '250px' }}
+						borderRadius={'lg'}
+						objectFit={'cover'}
+						onClick={onDetailedCourse}
+						cursor={'pointer'}
+					/>
 					<Stack>
 						<HStack>
 							<Text color={'#e59819'}>{course.reviewAvarage.toFixed(1)}</Text>
@@ -24,7 +38,7 @@ function AllCoursesCard({ course }: AllCoursesCardProps) {
 							Яман пойтахти Сано шаҳридаги мактаблардан бирида Рамазон ойи тугашига бир неча кун қолганида садақалар тарқатилган
 							жойда оммавий тиқилинч юзага келди. Ҳусийларга кўра,{' '}
 						</Text>
-						<Flex align={'center'} gap={2} direction={{base: 'column', lg: 'row'}}>
+						<Flex align={'center'} gap={2} direction={{ base: 'column', lg: 'row' }}>
 							<HStack align={'center'}>
 								<Image src={course.author.avatar} alt={course.author.firstName} w={50} h={50} borderRadius={'full'} />
 								<Text>
@@ -33,14 +47,14 @@ function AllCoursesCard({ course }: AllCoursesCardProps) {
 							</HStack>
 							{/*<Icon as={CiViewList} />*/}
 							<Text>{course.lessonCount} Lesson</Text>
-                             <HStack align={'center'} gap={1}>
-									 <Icon as={AiOutlineClockCircle} />
-									 <Text>{course.totalHour} Hour</Text>
-								 </HStack>
-								 <Flex align={'center'} gap={1}>
-									 {/*<Icon as={SiGoogleanalytics} />*/}
-									 <Text fontSize={'16px'}>{course.level}</Text>
-								 </Flex>
+							<HStack align={'center'} gap={1}>
+								<Icon as={AiOutlineClockCircle} />
+								<Text>{course.totalHour} Hour</Text>
+							</HStack>
+							<Flex align={'center'} gap={1}>
+								{/*<Icon as={SiGoogleanalytics} />*/}
+								<Text fontSize={'16px'}>{course.level}</Text>
+							</Flex>
 						</Flex>
 						<Divider />
 						<Flex align={'center'} justify={'space-between'}>
@@ -51,14 +65,15 @@ function AllCoursesCard({ course }: AllCoursesCardProps) {
 								{/*<Button rightIcon={<BsMinecartLoaded />} colorScheme={'facebook'}>*/}
 								{/*	Add to card*/}
 								{/*</Button>*/}
-								<Button colorScheme={'facebook'} variant={'outline'}>
+
+								<Button onClick={onDetailedCourse} colorScheme={'facebook'} variant={'outline'}>
 									Detail
 								</Button>
 							</Flex>
 						</Flex>
 					</Stack>
 				</Flex>
-				</HStack>
+			</HStack>
 			<Divider />
 		</>
 	);

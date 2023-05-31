@@ -12,7 +12,7 @@ export default function SocialMedia() {
 				_before={{
 					content: '" "',
 					position: 'absolute',
-					width: '45%',
+					width: '40%',
 					top: '50%',
 					left: '0',
 					transform: 'translateY(-50%)',
@@ -22,7 +22,7 @@ export default function SocialMedia() {
 				_after={{
 					content: '" "',
 					position: 'absolute',
-					width: '45%',
+					width: '40%',
 					height: '1px',
 					right: '0',
 					top: '50%',
@@ -36,13 +36,13 @@ export default function SocialMedia() {
 			<HStack>
 				<Button w={'full'} colorScheme={'gray'} leftIcon={<FaGithub />}>
 					<Center>
-						<Text>Content with GitHup</Text>
+						<Text>GitHup</Text>
 					</Center>
 				</Button>
 
 				<Button w={'full'} colorScheme={'red'} variant={'outline'} leftIcon={<FaGoogle />}>
 					<Center>
-						<Text>Content with Google</Text>
+						<Text>Google</Text>
 					</Center>
 				</Button>
 			</HStack>
