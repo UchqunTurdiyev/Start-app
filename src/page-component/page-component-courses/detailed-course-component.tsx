@@ -1,4 +1,4 @@
-import { Curreculm, Description, Mentor, Rewiev } from '@/components';
+import { Curreculm, Description, Mentor, Overwiev, Rewiev } from '@/components';
 import { courses } from '@/config/constants';
 import { CourseType } from '@/interfaces/course.interfaces';
 import {
@@ -47,6 +47,7 @@ export default function DetailedCourseComponent() {
 	const tabHandler = (idx: number) => {
 		setTabIndex(idx);
 	};
+
 	return (
 		<>
 			{/* // Header content */}
@@ -90,9 +91,9 @@ export default function DetailedCourseComponent() {
 										/>
 										<Stack mt={5} direction={'row'} align={'flex-end'} justify={'space-between'}>
 											<Heading fontSize={'2xl'}>Bepul</Heading>
-											{/* <Text textDecoration={'line-through'}>
-											{course?.price.toLocaleString('en-US', { currency: 'USD', style: 'currensy' })}
-										</Text> */}
+											<Text textDecoration={'line-through'}>
+												{course?.price.toLocaleString('en-US', { currency: 'USD', style: 'currency' })}
+											</Text>
 										</Stack>
 										<Button mt={5} w={'full'} h={14} colorScheme={'facebook'}>
 											Enroll
@@ -175,7 +176,7 @@ export default function DetailedCourseComponent() {
 					))}
 				</TabList>
 				<Box w={'full'}>
-					{tabIndex === 0 && <Description />}
+					{tabIndex === 0 && <Overwiev />}
 					{tabIndex === 1 && <Curreculm />}
 					{tabIndex === 2 && <Rewiev />}
 					{tabIndex === 3 && <Mentor />}
@@ -187,7 +188,7 @@ export default function DetailedCourseComponent() {
 
 const tablist = [
 	{
-		name: 'Description',
+		name: 'Overwiev',
 		Icon: FaRibbon,
 	},
 	{

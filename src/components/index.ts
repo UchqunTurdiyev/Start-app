@@ -13,7 +13,7 @@ export { default as Register } from './register/register';
 export { default as Verefication } from './verefication/verefication';
 export { default as SocialMedia } from './social-media/social-media';
 export { default as AccountRecovery } from './account-recovery/account-recovery';
-export { default as Description } from './description/description';
+export { default as Overwiev } from './overwiev/overwiev';
 export { default as Curreculm } from './curreculm/curreculm';
 export { default as Rewiev } from './rewiev/rewiev';
 export { default as Mentor } from './mentor/mentor';
