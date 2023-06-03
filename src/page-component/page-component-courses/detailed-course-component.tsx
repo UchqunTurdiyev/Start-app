@@ -1,4 +1,4 @@
-import { Curreculm, Description, Mentor, Overwiev, Rewiev } from '@/components';
+import { Curreculm, Mentor, Overwiev, Reviews } from '@/components';
 import { courses } from '@/config/constants';
 import { CourseType } from '@/interfaces/course.interfaces';
 import {
@@ -178,7 +178,7 @@ export default function DetailedCourseComponent() {
 				<Box w={'full'}>
 					{tabIndex === 0 && <Overwiev />}
 					{tabIndex === 1 && <Curreculm />}
-					{tabIndex === 2 && <Rewiev />}
+					{tabIndex === 2 && <Reviews />}
 					{tabIndex === 3 && <Mentor />}
 				</Box>
 			</Tabs>
