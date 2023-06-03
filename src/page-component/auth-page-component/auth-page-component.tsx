@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { avatars } from '@/config/constants';
 import { AccountRecovery, Login, Register, SocialMedia, Verefication } from '@/components';
-import { LoginProps } from '@/components/login/login.props';
+
 import { useTranslation } from 'react-i18next';
 
 export default function AuthPageComponent() {
