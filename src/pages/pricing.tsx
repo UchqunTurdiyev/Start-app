@@ -1,10 +1,15 @@
 import { withLayout } from '@/layouts/layout';
 import Seo from '@/layouts/seo/seo';
 import { PricingPageComponent } from '@/page-component';
+import { useTranslation } from 'react-i18next';
 
 function PricingPage() {
+	const { t } = useTranslation();
 	return (
-		<Seo metaTitle='Sammi | Pricing Package' metaDescription='The best package for using  and doing lesson on sammi academik'>
+		<Seo
+			metaTitle={`${t('pricing_page_title', { ns: 'seo' })}`}
+			metaDescription={`${t('pricing_page_description', { ns: 'seo' })}`}
+		>
 			<PricingPageComponent />
 		</Seo>
 	);

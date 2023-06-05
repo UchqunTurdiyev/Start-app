@@ -5,12 +5,16 @@ import Seo from '@/layouts/seo/seo';
 import { ArticlePageComponent } from '@/page-component';
 import { Articles } from '@/servises/article.service';
 import { GetServerSideProps } from 'next';
+import { useTranslation } from 'react-i18next';
 
 function ArticlePage({ articles }: ArticlesPageProps) {
-	console.log(articles);
+	const { t } = useTranslation();
 
 	return (
-		<Seo metaTitle='Articles'>
+		<Seo
+			metaTitle={`${t('article_page_title', { ns: 'seo' })}`}
+			metaDescription={`${t('article_page_description', { ns: 'seo' })}`}
+		>
 			<ArticlePageComponent articles={articles} />
 		</Seo>
 	);
