@@ -29,7 +29,8 @@ import { GrOverview } from 'react-icons/gr';
 import { MdPlayLesson } from 'react-icons/md';
 import { TbCertificate } from 'react-icons/tb';
 import { TfiAlarmClock, TfiTimer } from 'react-icons/tfi';
-// import { ReactStars } from 'react-stars';
+import ReactStars from 'react-stars';
+import Cookies from 'js-cookie';
 
 export default function DetailedCourseComponent() {
 	const [course, setData] = useState<CourseType>();
@@ -65,16 +66,18 @@ export default function DetailedCourseComponent() {
 							<Stack mt={5} direction={!media ? 'column' : 'row'} gap={1}>
 								<Flex fontSize={'sm'} align={'flex-end'} gap={1}>
 									<Text>5.0</Text>
-									{/* <ReactStars edit={false} value={5} /> */}
+									<ReactStars edit={false} value={5} />
 									<Text>(10)</Text>
 								</Flex>
 								<Flex align={'center'} fontSize={'sm'} gap={1}>
 									<Icon as={FaUserGraduate} />
-									<Text>100 O'quvchilar</Text>
+									<Text>100 {t('students', { ns: 'course' })}</Text>
 								</Flex>
 								<Flex align={'center'} fontSize={'sm'} gap={1}>
 									<Icon as={TfiAlarmClock} />
-									<Text>Oxirgi yangilanish {course && format(new Date(), 'dd MMMM, yyyy')}</Text>
+									<Text>
+										{t('update_l', { ns: 'course' })} {course && format(new Date(), 'dd MMMM, yyyy')}
+									</Text>
 								</Flex>
 							</Stack>
 						</Box>
@@ -96,13 +99,13 @@ export default function DetailedCourseComponent() {
 											</Text>
 										</Stack>
 										<Button mt={5} w={'full'} h={14} colorScheme={'facebook'}>
-											Enroll
+											{t('enroll', { ns: 'course' })}
 										</Button>
 										<Box mt={3}>
 											<Flex justify={'space-between'} align={'center'} py={2} px={2} fontSize={'17px'}>
 												<Flex align={'center'} gap={3}>
 													<MdPlayLesson />
-													<Text fontWeight={'bold'}>{t('lessons', { ns: 'courses' })}</Text>
+													<Text fontWeight={'bold'}>{t('lessons', { ns: 'course' })}</Text>
 												</Flex>
 												<Text>{course?.lessonCount}</Text>
 											</Flex>
@@ -110,17 +113,17 @@ export default function DetailedCourseComponent() {
 											<Flex justify={'space-between'} align={'center'} py={2} px={2} fontSize={'17px'}>
 												<Flex align={'center'} gap={3}>
 													<TfiTimer />
-													<Text fontWeight={'bold'}>{t('total_hour', { ns: 'courses' })}</Text>
+													<Text fontWeight={'bold'}>{t('total_hour', { ns: 'course' })}</Text>
 												</Flex>
 												<Text>
-													{course?.totalHour} {t('hour', { ns: 'courses' })}
+													{course?.totalHour} {t('hour', { ns: 'course' })}
 												</Text>
 											</Flex>
 											<Divider />
 											<Flex justify={'space-between'} align={'center'} py={2} px={2} fontSize={'17px'}>
 												<Flex align={'center'} gap={3}>
 													<BsBarChart />
-													<Text fontWeight={'bold'}>{t('level', { ns: 'courses' })}</Text>
+													<Text fontWeight={'bold'}>{t('level', { ns: 'course' })}</Text>
 												</Flex>
 												<Text>{course?.level}</Text>
 											</Flex>
@@ -128,7 +131,7 @@ export default function DetailedCourseComponent() {
 											<Flex justify={'space-between'} align={'center'} py={2} px={2} fontSize={'17px'}>
 												<Flex align={'center'} gap={3}>
 													<FaLanguage />
-													<Text fontWeight={'bold'}>{t('language', { ns: 'courses' })}</Text>
+													<Text fontWeight={'bold'}>{t('language', { ns: 'course' })}</Text>
 												</Flex>
 												<Text>English</Text>
 											</Flex>
@@ -136,7 +139,7 @@ export default function DetailedCourseComponent() {
 											<Flex justify={'space-between'} align={'center'} py={2} px={2} fontSize={'17px'}>
 												<Flex align={'center'} gap={3}>
 													<TbCertificate />
-													<Text fontWeight={'bold'}>{t('sertificate', { ns: 'courses' })}</Text>
+													<Text fontWeight={'bold'}>{t('sertificate', { ns: 'course' })}</Text>
 												</Flex>
 												<Text>No</Text>
 											</Flex>
@@ -144,7 +147,7 @@ export default function DetailedCourseComponent() {
 											<Flex justify={'space-between'} align={'center'} py={2} px={2} fontSize={'17px'}>
 												<Flex align={'center'} gap={3}>
 													<GiInfinity />
-													<Text fontWeight={'bold'}>{t('access', { ns: 'courses' })}</Text>
+													<Text fontWeight={'bold'}>{t('access', { ns: 'course' })}</Text>
 												</Flex>
 												<Text>Lifetime</Text>
 											</Flex>
@@ -171,7 +174,7 @@ export default function DetailedCourseComponent() {
 				<TabList>
 					{tablist.map(tab => (
 						<Tab key={tab.name} fontWeight='bold' textTransform='capitalize' w='100%' justifyContent={'center'}>
-							<Icon as={tab.Icon} mr='2' display={{ base: 'none', md: 'block' }} /> {t(tab.name, { ns: 'courses' })}
+							<Icon as={tab.Icon} mr='2' display={{ base: 'none', md: 'block' }} /> {t(tab.name, { ns: 'course' })}
 						</Tab>
 					))}
 				</TabList>
@@ -188,7 +191,7 @@ export default function DetailedCourseComponent() {
 
 const tablist = [
 	{
-		name: 'Overwiev',
+		name: 'overview',
 		Icon: FaRibbon,
 	},
 	{

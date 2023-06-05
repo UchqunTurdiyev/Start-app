@@ -1,17 +1,19 @@
 import { Avatar, Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsPlayCircle } from 'react-icons/bs';
 import { FaStar, FaUserGraduate } from 'react-icons/fa';
 
 export default function Mentor() {
+	const { t } = useTranslation();
 	return (
 		<>
-			<Heading mt={5}>Mentor</Heading>
+			<Heading mt={5}>{t('mentor', { ns: 'course' })}</Heading>
 			<Flex mt={5} gap={5} align={'center'}>
 				<Avatar display={{ base: 'none', md: 'block' }} src='https://avatars.githubusercontent.com/u/83647411?v=4' size={'2xl'} />
 				<Box>
 					<Text fontWeight={'bold'} fontSize={'20px'}>
-						Samar Badriddinov
+						Uchqun Turdiev
 					</Text>
 					<Text>Software Engineer & Coding instructor</Text>
 					<Stack direction={{ base: 'column', md: 'row' }} mt={2} gap={2} align={{ base: 'flex-start', md: 'center' }}>

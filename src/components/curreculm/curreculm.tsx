@@ -13,16 +13,18 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { GoPrimitiveDot } from 'react-icons/go';
 
 export default function Curreculm() {
+	const { t } = useTranslation();
 	return (
 		<>
-			<Heading mt={10}>Curreculm</Heading>
+			<Heading mt={10}>{t('curriculum', { ns: 'course' })}</Heading>
 			<Flex align={'center'} gap={2} mt={3}>
-				{data.length} Modules <Icon as={GoPrimitiveDot} />
-				{data.map(c => c.lessons.length).reduce((a, b) => +a + +b, 0)} Lessons
+				{data.length} {t('modules', { ns: 'course' })} <Icon as={GoPrimitiveDot} />
+				{data.map(c => c.lessons.length).reduce((a, b) => +a + +b, 0)} {t('lessons', { ns: 'course' })}
 			</Flex>
 			<Accordion defaultIndex={[0]} allowToggle mr={2}>
 				{data.map(el => (
