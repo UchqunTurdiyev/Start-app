@@ -4,7 +4,7 @@ import { HomePageComponent } from '@/page-component';
 
 const Home = () => {
 	return (
-		<Seo>
+		<Seo metaTitle='Sammi | Pricing Package' metaDescription='The best package for using  and doing lesson on sammi academik'>
 			<HomePageComponent />
 		</Seo>
 	);

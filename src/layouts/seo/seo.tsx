@@ -1,9 +1,8 @@
-import React from 'react';
 import Head from 'next/head';
-import { siteConfig } from '@/config/site.config';
 import { SeoProps } from './seo.props';
+import { siteConfig } from '@/config/site.config';
 
-export default function Seo(props: SeoProps) {
+const Seo = (props: SeoProps) => {
 	const {
 		children,
 		metaTitle = siteConfig.metaData.title,
@@ -11,6 +10,7 @@ export default function Seo(props: SeoProps) {
 		metaKeyword = siteConfig.metaData.keyword,
 		ogImage = siteConfig.metaData.ogImage,
 	} = props;
+
 	return (
 		<>
 			<Head>
@@ -39,4 +39,8 @@ export default function Seo(props: SeoProps) {
 			<>{children}</>
 		</>
 	);
-}
+};
+
+export default Seo;
+
+// bu dars 2 platformada korishim kerak

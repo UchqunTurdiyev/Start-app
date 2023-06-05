@@ -1,6 +1,7 @@
 import { ArticleType } from '@/interfaces/article.interface';
 import { Language } from '@/interfaces/constants.interfaces';
 import { withLayout } from '@/layouts/layout';
+import Seo from '@/layouts/seo/seo';
 import { ArticlePageComponent } from '@/page-component';
 import { Articles } from '@/servises/article.service';
 import { GetServerSideProps } from 'next';
@@ -8,7 +9,11 @@ import { GetServerSideProps } from 'next';
 function ArticlePage({ articles }: ArticlesPageProps) {
 	console.log(articles);
 
-	return <ArticlePageComponent articles={articles} />;
+	return (
+		<Seo metaTitle='Articles'>
+			<ArticlePageComponent articles={articles} />
+		</Seo>
+	);
 }
 export default withLayout(ArticlePage);
 
