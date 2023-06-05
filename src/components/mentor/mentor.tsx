@@ -34,7 +34,7 @@ export default function Mentor() {
 			</Flex>
 			<Text mt={4}>
 				<Box as={'span'} fontWeight={'bold'} color={'facebook.500'}>
-					Samar Badriddinov
+					Uchqun Turdiev
 				</Box>{' '}
 				- Sammi platformasi asoschisi hamda Amerika, Tunisia va Rossiya do'vlatrida bir nachta StartUp loyihalarda ishtrok etgan.
 				Xozirgi kunda Amerikadagi sug'urta kompaniyasida ishlaydi.
