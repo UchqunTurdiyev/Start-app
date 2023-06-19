@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Divider, Flex, Heading, HStack, Icon, Image, Stack, Text } from '@chakra-ui/react';
-import ReactStars from 'react-stars';
+// import ReactStars from 'react-stars';
 import { CiViewList } from 'react-icons/ci';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
@@ -30,7 +30,7 @@ function AllCoursesCard({ course }: AllCoursesCardProps) {
 					<Stack>
 						<HStack>
 							<Text color={'#e59819'}>{course.reviewAvarage.toFixed(1)}</Text>
-							<ReactStars edit={false} value={course.reviewAvarage} color2={'#e59819'} />
+							{/* <ReactStars edit={false} value={course.reviewAvarage} color2={'#e59819'} /> */}
 							<Text opacity={'0.8'}>({course.reviewCount})</Text>
 						</HStack>
 						<Heading fontSize={'xl'}>{course.title}</Heading>

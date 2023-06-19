@@ -7,6 +7,7 @@ import {
 	HStack,
 	Icon,
 	IconButton,
+	Image,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -51,7 +52,13 @@ function Header({ onToggle }: HeaderProps) {
 			<Flex h={'full'} justify={'space-between'} align={'center'}>
 				<HStack>
 					<Icon onClick={onToggle} as={BiMenuAltLeft} w={6} h={6} cursor={'pointer'} />
-					<Link href={'/'}>{colorMode == 'light' ? <DarkLogo /> : <LightLogo />}</Link>
+					<Link href={'/'}>
+						{colorMode === 'light' ? (
+							<Image w={40} src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/dark_logo.png'} alt='logo' />
+						) : (
+							<Image w={40} src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/light_logo.png'} alt='logo' />
+						)}
+					</Link>
 				</HStack>
 				<HStack>
 					<IconButton aria-label='support' icon={<MdOutlineContactSupport />} colorScheme={'facebook'} variant={'ghost'} />

@@ -57,14 +57,7 @@ function ArticleDetailedComponent({ article }: ArticleDetailedProps) {
 						h5: ({ children }) => <Heading as={'h5'}>{children}</Heading>,
 						bold: ({ children }) => <Text fontWeight={'bold'}>{children}</Text>,
 						p: ({ children }) => <Text my={4}>{children}</Text>,
-						img: children => (
-							<Image
-								src={children.src}
-								alt={children.altText}
-								width={children.width}
-								height={children.height}
-							/>
-						),
+						img: children => <Image src={children.src} alt={children.altText} width={children.width} height={children.height} />,
 						a: children => <Image src={children.href} alt={children.title} />,
 					}}
 				/>

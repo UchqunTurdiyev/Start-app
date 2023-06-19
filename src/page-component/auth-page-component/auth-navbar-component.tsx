@@ -8,6 +8,7 @@ import {
 	Flex,
 	HStack,
 	IconButton,
+	Image,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -34,10 +35,24 @@ export default function AuthNavbarComponent() {
 		<Box w={'full'} h={'10vh'} pos={'fixed'} top={0} right={0} left={0} zIndex={20}>
 			<Container maxW={'container.lg'}>
 				<Flex alignItems={'center '} justify={'space-between'} h={'10vh'}>
-					<Link href={'/'}>{colorMode == 'light' ? <DarkLogo /> : <LightLogo />}</Link>
+					<Link href={'/'}>
+						{colorMode === 'light' ? (
+							<Image
+								w={40}
+								src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/dark_logo.png'}
+								alt='logo Invest'
+							/>
+						) : (
+							<Image
+								w={40}
+								src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/light_logo.png'}
+								alt='logo img'
+							/>
+						)}
+					</Link>
 					<HStack gap={5}>
 						{navigation[1].links.map(nav => (
-							<Link href={nav.route}>
+							<Link href={nav.route} key={nav.route}>
 								<Box color={'facebook.300'} _hover={{ textDecoration: 'underline', color: hoverLink }} as='a'>
 									{t(nav.label, { ns: 'layout' })}
 								</Box>
