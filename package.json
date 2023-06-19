@@ -22,7 +22,6 @@
 		"@types/react-stars": "^2.2.1",
 		"autoprefixer": "10.4.14",
 		"date-fns": "^2.29.3",
-		"eslint": "8.38.0",
 		"eslint-config-next": "13.3.0",
 		"framer-motion": "^10.11.2",
 		"graphql": "^16.6.0",
@@ -48,6 +47,9 @@
 	"devDependencies": {
 		"@types/nprogress": "^0.2.0",
 		"@typescript-eslint/eslint-plugin": "^5.57.1",
-		"@typescript-eslint/parser": "^5.57.1"
+		"@typescript-eslint/parser": "^5.57.1",
+		"eslint": "^8.42.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1"
 	}
 }
