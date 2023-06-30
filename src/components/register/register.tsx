@@ -21,14 +21,15 @@ import useShowPassword from '@/hooks/useShowPassword';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { allActions } from '@/store/root-action';
+import { useActions } from '@/hooks/useActions';
 
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const { t } = useTranslation();
-	const dispatch = useDispatch();
+	const { register } = useActions();
 
 	const onSubmit = () => {
-		dispatch(allActions.register({ email: 'test123@gmail.com', password: '1234567' }));
+		register({ email: 'test12345@gmail.com', password: '1234567' });
 	};
 	return (
 		<Stack spacing={4}>
