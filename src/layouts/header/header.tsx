@@ -54,9 +54,9 @@ function Header({ onToggle }: HeaderProps) {
 					<Icon onClick={onToggle} as={BiMenuAltLeft} w={6} h={6} cursor={'pointer'} />
 					<Link href={'/'}>
 						{colorMode === 'light' ? (
-							<Image w={40} src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/dark_logo.png'} alt='logo' />
+							<Image w={28} src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/dark_logo.png'} alt='logo' />
 						) : (
-							<Image w={40} src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/light_logo.png'} alt='logo' />
+							<Image w={28} src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/light_logo.png'} alt='logo' />
 						)}
 					</Link>
 				</HStack>

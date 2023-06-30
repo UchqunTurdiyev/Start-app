@@ -19,10 +19,17 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RegisterProps } from './register.props';
 import useShowPassword from '@/hooks/useShowPassword';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { allActions } from '@/store/root-action';
 
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
+
+	const onSubmit = () => {
+		dispatch(allActions.register({ email: 'test123@gmail.com', password: '1234567' }));
+	};
 	return (
 		<Stack spacing={4}>
 			<Heading
@@ -76,7 +83,7 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 					color={'teal.500'}
 					_hover={{ textDecoration: 'underline' }}
 				>
-					{t('register_btn', { ns: 'global' })}
+					{t('auth_forgot_password', { ns: 'global' })}
 				</Box>
 			</HStack>
 			<Button
@@ -86,8 +93,9 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 				color={'white'}
 				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
 				h={14}
+				onClick={onSubmit}
 			>
-				Submit
+				{t('register_btn', { ns: 'global' })}
 			</Button>
 			<Text>
 				Allready have an account{' '}
