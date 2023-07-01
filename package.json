@@ -24,6 +24,7 @@
 		"axios": "^1.4.0",
 		"date-fns": "^2.29.3",
 		"eslint-config-next": "13.3.0",
+		"formik": "^2.2.9",
 		"framer-motion": "^10.11.2",
 		"graphql": "^16.6.0",
 		"graphql-request": "^5.2.0",
