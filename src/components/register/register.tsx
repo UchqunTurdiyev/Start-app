@@ -19,19 +19,30 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RegisterProps } from './register.props';
 import useShowPassword from '@/hooks/useShowPassword';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { allActions } from '@/store/root-action';
 import { useActions } from '@/hooks/useActions';
 import { Formik, Form } from 'formik';
 import TextField from '../text-field/text-field';
+import { AuthValidation } from '@/validations/auth.validation';
+import { InterfacesEmailAndPassword } from '@/store/user/user.interface';
+import { useState } from 'react';
 
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [error, setError] = useState<string>('');
+
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const { t } = useTranslation();
 	const { register } = useActions();
 
-	const onSubmit = () => {
-		register({ email: 'test12345@gmail.com', password: '1234567' });
+	const onSubmit = async (formData: InterfacesEmailAndPassword) => {
+		try {
+			setIsLoading(true);
+			register({ email: formData.email, password: formData.password });
+			setIsLoading(false);
+		} catch (error) {
+			console.log(error);
+			setIsLoading(false);
+		}
 	};
 	return (
 		<Stack spacing={4}>
@@ -48,7 +59,11 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('register_description', { ns: 'global' })}
 			</Text>
-			<Formik onSubmit={onSubmit} initialValues={{ email: '', password: '', confirmPassword: '' }}>
+			<Formik
+				onSubmit={onSubmit}
+				initialValues={{ email: '', password: '', confirmPassword: '' }}
+				validationSchema={AuthValidation.register}
+			>
 				<Form>
 					<TextField
 						name='email'
@@ -85,32 +100,34 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 							</InputRightElement>
 						</TextField>
 					</Flex>
+					<HStack mt={4} justify={'space-between'}>
+						<Checkbox colorScheme={'facebook'}>{t('register_btn', { ns: 'global' })}</Checkbox>
+						<Box
+							as={'a'}
+							onClick={() => onNavigationStateComponent('account-recovery')}
+							cursor={'pointer'}
+							color={'teal.500'}
+							_hover={{ textDecoration: 'underline' }}
+						>
+							{t('auth_forgot_password', { ns: 'global' })}
+						</Box>
+					</HStack>
+					<Button
+						mt={4}
+						w={'full'}
+						bgGradient='linear(to-r, facebook.400, gray.400)'
+						color={'white'}
+						_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
+						h={14}
+						type={'submit'}
+						isLoading={isLoading}
+						loadingText={'Loading...'}
+					>
+						{t('register_btn', { ns: 'global' })}
+					</Button>
 				</Form>
 			</Formik>
 
-			<HStack justify={'space-between'}>
-				<Checkbox colorScheme={'facebook'}>{t('register_btn', { ns: 'global' })}</Checkbox>
-				<Box
-					as={'a'}
-					onClick={() => onNavigationStateComponent('account-recovery')}
-					cursor={'pointer'}
-					color={'teal.500'}
-					_hover={{ textDecoration: 'underline' }}
-				>
-					{t('auth_forgot_password', { ns: 'global' })}
-				</Box>
-			</HStack>
-			<Button
-				mt={4}
-				w={'full'}
-				bgGradient='linear(to-r, facebook.400, gray.400)'
-				color={'white'}
-				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
-				h={14}
-				onClick={onSubmit}
-			>
-				{t('register_btn', { ns: 'global' })}
-			</Button>
 			<Text>
 				Allready have an account{' '}
 				<Box

@@ -9,7 +9,6 @@ export const register = createAsyncThunk<AuthUserResponse, InterfacesEmailAndPas
 			const response = await AuthService.register(email, password);
 			return response.data;
 		} catch (error) {
-			console.log(error);
 			return thunkApi.rejectWithValue(error);
 		}
 	}
@@ -22,7 +21,6 @@ export const login = createAsyncThunk<AuthUserResponse, InterfacesEmailAndPasswo
 			const response = await AuthService.login(email, password);
 			return response.data;
 		} catch (error) {
-			console.log(error);
 			return thunkApi.rejectWithValue(error);
 		}
 	}
@@ -37,7 +35,6 @@ export const checkAuth = createAsyncThunk<AuthUserResponse>('auth/check-auth', a
 		const response = await AuthService.getNewTokens();
 		return response.data;
 	} catch (error) {
-		console.log(error);
 		return thunkApi.rejectWithValue(error);
 	}
 });
