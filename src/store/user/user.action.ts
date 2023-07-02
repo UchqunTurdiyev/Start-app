@@ -1,6 +1,7 @@
 import { AuthService } from '@/servises/auth.service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthUserResponse, InterfacesEmailAndPassword } from './user.interface';
+import { errorCatch } from '@/helper/api.helper';
 
 export const register = createAsyncThunk<AuthUserResponse, InterfacesEmailAndPassword>(
 	'auth/register',
@@ -9,7 +10,7 @@ export const register = createAsyncThunk<AuthUserResponse, InterfacesEmailAndPas
 			const response = await AuthService.register(email, password);
 			return response.data;
 		} catch (error) {
-			return thunkApi.rejectWithValue(error);
+			return thunkApi.rejectWithValue(errorCatch(error));
 		}
 	}
 );
@@ -21,7 +22,7 @@ export const login = createAsyncThunk<AuthUserResponse, InterfacesEmailAndPasswo
 			const response = await AuthService.login(email, password);
 			return response.data;
 		} catch (error) {
-			return thunkApi.rejectWithValue(error);
+			return thunkApi.rejectWithValue(errorCatch(error));
 		}
 	}
 );

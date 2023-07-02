@@ -11,4 +11,11 @@ export const AuthValidation = {
 				.required('Confirm password is required'),
 		});
 	},
+
+	login() {
+		return Yup.object({
+			email: Yup.string().email('Email is invalid').required('Email is required'),
+			password: Yup.string().min(6, 'Password should be min 6 charakteres').required('Password is required'),
+		});
+	},
 };

@@ -25,24 +25,19 @@ import TextField from '../text-field/text-field';
 import { AuthValidation } from '@/validations/auth.validation';
 import { InterfacesEmailAndPassword } from '@/store/user/user.interface';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import ErrorAlert from '../error-alert/error-alert';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [error, setError] = useState<string>('');
-
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const { t } = useTranslation();
 	const { register } = useActions();
+	const { error, isLoading } = useTypedSelector(state => state.user);
 
 	const onSubmit = async (formData: InterfacesEmailAndPassword) => {
-		try {
-			setIsLoading(true);
-			register({ email: formData.email, password: formData.password });
-			setIsLoading(false);
-		} catch (error) {
-			console.log(error);
-			setIsLoading(false);
-		}
+		register({ email: formData.email, password: formData.password });
 	};
 	return (
 		<Stack spacing={4}>
@@ -65,6 +60,7 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 				validationSchema={AuthValidation.register}
 			>
 				<Form>
+					<>{error && <ErrorAlert title={error as string} />}</>
 					<TextField
 						name='email'
 						type='text'

@@ -3,6 +3,7 @@ import { UserType } from '@/interfaces/user.interfaces';
 export interface UserInitialStateType {
 	user: UserType | null;
 	isLoading: boolean;
+	error: string | null | unknown;
 }
 
 export interface AuthTokens {

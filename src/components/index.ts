@@ -17,3 +17,4 @@ export { default as Overwiev } from './overwiev/overwiev';
 export { default as Curreculm } from './curreculm/curreculm';
 export { default as Reviews } from './rewiev/reviews';
 export { default as Mentor } from './mentor/mentor';
+export { default as ErrorAlert } from './error-alert/error-alert';
