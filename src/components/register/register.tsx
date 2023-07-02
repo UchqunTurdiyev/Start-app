@@ -33,11 +33,11 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const { t } = useTranslation();
-	const { register } = useActions();
+	const { pendingRegister } = useActions();
 	const { error, isLoading } = useTypedSelector(state => state.user);
 
 	const onSubmit = async (formData: InterfacesEmailAndPassword) => {
-		register({ email: formData.email, password: formData.password });
+		pendingRegister({ email: formData.email, password: formData.password });
 	};
 	return (
 		<Stack spacing={4}>

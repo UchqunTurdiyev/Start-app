@@ -1,6 +1,6 @@
 import { checkAuth, login, logout, register } from './user.action';
-import { UserInitialStateType } from './user.interface';
-import { createSlice } from '@reduxjs/toolkit';
+import { InterfacesEmailAndPassword, UserInitialStateType } from './user.interface';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: UserInitialStateType = {
 	user: null,
@@ -11,7 +11,11 @@ const initialState: UserInitialStateType = {
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {},
+	reducers: {
+		pendingRegister: (state, action: PayloadAction<InterfacesEmailAndPassword>) => {
+			state.user = { email: action.payload.email, password: action.payload.password };
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(register.pending, state => {
@@ -53,4 +57,5 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { reducer } = userSlice;
+export const userReducer = userSlice.reducer;
+export const userSliceAction = userSlice.actions;
