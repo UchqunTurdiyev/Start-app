@@ -18,4 +18,11 @@ export const AuthValidation = {
 			password: Yup.string().min(6, 'Password should be min 6 charakteres').required('Password is required'),
 		});
 	},
+	// otp
+
+	otp() {
+		return Yup.object({
+			otp: Yup.string().required('OTP verification code is required').min(6, 'Verification code should be 6 digits number'),
+		});
+	},
 };

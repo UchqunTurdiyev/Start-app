@@ -1,3 +1,4 @@
+import { InterfacesEmailAndPassword } from './user.interface';
 import { UserType } from '@/interfaces/user.interfaces';
 
 export interface UserInitialStateType {
@@ -18,4 +19,9 @@ export interface AuthUserResponse extends AuthTokens {
 export interface InterfacesEmailAndPassword {
 	password: string;
 	email: string;
+}
+
+export interface InterfaceEmailAndOtp {
+	email: string;
+	otpVerification: string;
 }

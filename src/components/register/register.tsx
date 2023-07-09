@@ -40,7 +40,7 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 		const { email, password } = formData;
 		sendVerificationCode({ email });
 		pendingRegister({ email, password });
-		onNavigationStateComponent('verification');
+		!isLoading && onNavigationStateComponent('verification');
 	};
 	return (
 		<Stack spacing={4}>

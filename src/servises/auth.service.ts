@@ -33,6 +33,11 @@ export const AuthService = {
 		return response;
 	},
 
+	async verifyOtp(email: string, otpVerification: string) {
+		const response = await axios.post<'Success'>(`${API_URL}${getMailUrl('verify-otp')}`, { email, otpVerification });
+		return response;
+	},
+
 	logout() {
 		removeTokensCookie();
 		localStorage.removeItem('user');
