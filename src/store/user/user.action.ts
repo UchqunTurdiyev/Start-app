@@ -31,6 +31,18 @@ export const logout = createAsyncThunk('auth/logout', () => {
 	AuthService.logout();
 });
 
+export const sendVerificationCode = createAsyncThunk<'Success', { email: string }>(
+	'auth/verification-code',
+	async ({ email }, thunkApi) => {
+		try {
+			const response = await AuthService.sendOtp(email);
+			return response.data;
+		} catch (error) {
+			return thunkApi.rejectWithValue(errorCatch(error));
+		}
+	}
+);
+
 export const checkAuth = createAsyncThunk<AuthUserResponse>('auth/check-auth', async (_, thunkApi) => {
 	try {
 		const response = await AuthService.getNewTokens();

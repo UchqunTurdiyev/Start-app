@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, getAuthUrl } from '@/config/api.config';
+import { API_URL, getAuthUrl, getMailUrl } from '@/config/api.config';
 import { AuthUserResponse } from '@/store/user/user.interface';
 import { removeTokensCookie, saveStorage } from '@/helper/auth.helper';
 import Cookies from 'js-cookie';
@@ -25,6 +25,11 @@ export const AuthService = {
 			saveStorage(response.data);
 		}
 
+		return response;
+	},
+
+	async sendOtp(email: string) {
+		const response = await axios.post<'Success'>(`${API_URL}${getMailUrl('send-otp')}`, { email });
 		return response;
 	},
 
