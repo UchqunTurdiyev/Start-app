@@ -31,11 +31,11 @@ export const logout = createAsyncThunk('auth/logout', () => {
 	AuthService.logout();
 });
 
-export const sendVerificationCode = createAsyncThunk<'Success', { email: string }>(
+export const sendVerificationCode = createAsyncThunk<'Success', { email: string; isUser: boolean }>(
 	'auth/verification-code',
-	async ({ email }, thunkApi) => {
+	async ({ email, isUser }, thunkApi) => {
 		try {
-			const response = await AuthService.sendOtp(email);
+			const response = await AuthService.sendOtp(email, isUser);
 			return response.data;
 		} catch (error) {
 			return thunkApi.rejectWithValue(errorCatch(error));

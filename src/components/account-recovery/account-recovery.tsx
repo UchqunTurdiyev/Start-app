@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AccountRecoveryProps } from './account-recovery.props';
 import {
 	Button,
+	Center,
 	FormControl,
 	FormLabel,
 	HStack,
@@ -21,6 +22,12 @@ import {
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import useShowPassword from '@/hooks/useShowPassword';
+import { Form, Formik } from 'formik';
+import { AuthValidation } from '@/validations/auth.validation';
+import TextField from '../text-field/text-field';
+import { useActions } from '@/hooks/useActions';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+import ErrorAlert from '../error-alert/error-alert';
 
 export default function AccountRecovery({ onNavigationStateComponent }: AccountRecoveryProps) {
 	const [progress, setProgress] = useState<33.33 | 66.66 | 100>(33.33);
@@ -28,15 +35,15 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 	const { t } = useTranslation();
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const toast = useToast();
+	const { sendVerificationCode, verifyVerificationCode } = useActions();
+	const { error, isLoading } = useTypedSelector(state => state.user);
+	const [email, setEmail] = useState<string>('');
 
-	const onForm1Submit = () => {
+	const onForm1Submit = (formData: { email: string }) => {
+		sendVerificationCode({ email: formData.email, isUser: true });
+		setEmail(formData.email);
 		setStep(2);
 		setProgress(66.66);
-	};
-
-	const onForm2Submit = () => {
-		setStep(3);
-		setProgress(100);
 	};
 
 	const onForm3Submit = () => {
@@ -65,23 +72,40 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('account_recovery_description_form1', { ns: 'global' })}
 			</Text>
-			<FormControl isRequired>
-				<FormLabel>{t('login_input_email_label', { ns: 'global' })}</FormLabel>
-				<Input focusBorderColor='facebook.500' type='text' placeholder='example@gmail.com' h={14} />
-			</FormControl>
-			<Button
-				mt={4}
-				w={'full'}
-				bgGradient='linear(to-r, facebook.400, gray.400)'
-				color={'white'}
-				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
-				h={14}
-				onClick={onForm1Submit}
-			>
-				{t('account_recovery_btn_form1', { ns: 'global' })}
-			</Button>
+			<>{error && <ErrorAlert title={error as string} />}</>
+			<Formik onSubmit={onForm1Submit} initialValues={{ email: '' }} validationSchema={AuthValidation.onlyEmail}>
+				<Form>
+					<TextField
+						name='email'
+						label={t('login_input_email_label', { ns: 'global' })}
+						type='email'
+						placeholder={'info@gmail.com'}
+					/>
+					<Button
+						mt={4}
+						w={'full'}
+						bgGradient='linear(to-r, facebook.400, gray.400)'
+						color={'white'}
+						_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
+						h={14}
+						isLoading={isLoading}
+						loadingText={'Loading...'}
+						type={'submit'}
+					>
+						{t('account_recovery_btn_form1', { ns: 'global' })}
+					</Button>
+				</Form>
+			</Formik>
 		</>
 	);
+
+	const onForm2Submit = (formData: { otp: string }) => {
+		const data = { email: email, otpVerification: formData.otp };
+		verifyVerificationCode(data);
+		setStep(3);
+		setProgress(100);
+	};
+
 	const form2 = (
 		<>
 			<Heading
@@ -97,24 +121,49 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('account_recovery_description_form2', { ns: 'global' })}
 			</Text>
-			<HStack justify={'center'}>
-				<PinInput otp size={'lg'} colorScheme={'facebook'} focusBorderColor={'facebook.500'}>
-					{new Array(6).fill(1).map((_, idx) => (
-						<PinInputField key={idx} />
-					))}
-				</PinInput>
-			</HStack>
-			<Button
-				mt={4}
-				w={'full'}
-				bgGradient='linear(to-r, facebook.400, gray.400)'
-				color={'white'}
-				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
-				h={14}
-				onClick={onForm2Submit}
-			>
-				{t('account_recovery_btn_form2', { ns: 'global' })}
-			</Button>
+			<>{error && <ErrorAlert title={error as string} />}</>
+
+			<Formik onSubmit={onForm2Submit} initialValues={{ otp: '' }} validationSchema={AuthValidation.otp}>
+				{formik => (
+					<Form>
+						<Center>
+							<PinInput
+								onChange={val => formik.setFieldValue('otp', val)}
+								otp
+								size={'lg'}
+								colorScheme={'facebook'}
+								focusBorderColor={'facebook.500'}
+							>
+								{new Array(6).fill(1).map((_, idx) => (
+									<PinInputField
+										borderColor={formik.errors.otp && formik.touched.otp ? 'red.600' : 'facebook.600'}
+										mx={1}
+										key={idx}
+									/>
+								))}
+							</PinInput>
+						</Center>
+						{formik.errors.otp && formik.touched.otp && (
+							<Text textAlign={'center'} mt={2} fontSize={'14px'} color={'red.600'}>
+								{formik.errors.otp as string}
+							</Text>
+						)}
+						<Button
+							mt={4}
+							w={'full'}
+							bgGradient='linear(to-r, facebook.400, gray.400)'
+							color={'white'}
+							_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
+							h={14}
+							type={'submit'}
+							isLoading={isLoading}
+							loadingText={'Loading...'}
+						>
+							{t('account_recovery_btn_form2', { ns: 'global' })}
+						</Button>
+					</Form>
+				)}
+			</Formik>
 		</>
 	);
 	const form3 = (
