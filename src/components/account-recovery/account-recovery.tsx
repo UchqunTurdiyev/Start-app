@@ -40,10 +40,15 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 	const [email, setEmail] = useState<string>('');
 
 	const onForm1Submit = (formData: { email: string }) => {
-		sendVerificationCode({ email: formData.email, isUser: true });
-		setEmail(formData.email);
-		setStep(2);
-		setProgress(66.66);
+		sendVerificationCode({
+			email: formData.email,
+			isUser: true,
+			callback: () => {
+				setEmail(formData.email);
+				setStep(2);
+				setProgress(66.66);
+			},
+		});
 	};
 
 	const onForm3Submit = () => {
@@ -100,10 +105,14 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 	);
 
 	const onForm2Submit = (formData: { otp: string }) => {
-		const data = { email: email, otpVerification: formData.otp };
-		verifyVerificationCode(data);
-		setStep(3);
-		setProgress(100);
+		verifyVerificationCode({
+			email: email,
+			otpVerification: formData.otp,
+			callback: () => {
+				setStep(3);
+				setProgress(100);
+			},
+		});
 	};
 
 	const form2 = (

@@ -27,15 +27,21 @@ export default function Verefication() {
 	const toast = useToast();
 
 	const onSabmit = async (formData: { otp: string }) => {
-		const data = { email: user?.email as string, otpVerification: formData.otp };
-		const verifyResponse: any = await verifyVerificationCode(data);
-		if (verifyResponse.payload === 'Success') {
-			const response: any = await register({ email: user?.email as string, password: user?.password as string });
-			if (response.payload.accessToken) {
-				router.push('/');
-				toast({ title: 'Successfully logged in', position: 'top-right', isClosable: true });
-			}
-		}
+		const email = user?.email as string;
+		verifyVerificationCode({
+			email,
+			otpVerification: formData.otp,
+			callback: () => {
+				register({
+					email: user?.email as string,
+					password: user?.password as string,
+					callback: () => {
+						router.push('/');
+						toast({ title: 'Successfully logged in', position: 'top-right', isClosable: true });
+					},
+				});
+			},
+		});
 	};
 	return (
 		<Stack>

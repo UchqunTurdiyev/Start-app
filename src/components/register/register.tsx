@@ -38,12 +38,15 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 
 	const onSubmit = async (formData: InterfacesEmailAndPassword) => {
 		const { email, password } = formData;
-		const response = await sendVerificationCode({ email, isUser: false });
-		const result: any = response;
-		if (result.payload === 'Success') {
-			pendingRegister({ email, password });
-			!isLoading && onNavigationStateComponent('verification');
-		}
+
+		sendVerificationCode({
+			email,
+			isUser: false,
+			callback: () => {
+				pendingRegister({ email, password });
+				!isLoading && onNavigationStateComponent('verification');
+			},
+		});
 	};
 	return (
 		<Stack spacing={4}>
