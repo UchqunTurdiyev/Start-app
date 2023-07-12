@@ -35,7 +35,7 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 	const { t } = useTranslation();
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const toast = useToast();
-	const { sendVerificationCode, verifyVerificationCode } = useActions();
+	const { sendVerificationCode, verifyVerificationCode, editProfilePassword } = useActions();
 	const { error, isLoading } = useTypedSelector(state => state.user);
 	const [email, setEmail] = useState<string>('');
 
@@ -48,17 +48,6 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 				setStep(2);
 				setProgress(66.66);
 			},
-		});
-	};
-
-	const onForm3Submit = () => {
-		onNavigationStateComponent('login');
-		toast({
-			title: 'Successfully edited ',
-			description: 'You can login to account with new password',
-			status: 'success',
-			position: 'top-right',
-			isClosable: true,
 		});
 	};
 
@@ -175,6 +164,23 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			</Formik>
 		</>
 	);
+
+	const onForm3Submit = (formData: { password: string }) => {
+		editProfilePassword({
+			email,
+			password: formData.password,
+			callback: () => {
+				onNavigationStateComponent('login');
+				toast({
+					title: 'Successfully edited ',
+					description: 'You can login to account with new password',
+					status: 'success',
+					position: 'top-right',
+					isClosable: true,
+				});
+			},
+		});
+	};
 	const form3 = (
 		<>
 			<Heading
@@ -190,41 +196,54 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('account_recovery_description_form3', { ns: 'global' })}
 			</Text>
-			<FormControl isRequired>
-				<FormLabel>{t('account_recovery_title_form3', { ns: 'global' })}</FormLabel>
-				<InputGroup>
-					<Input focusBorderColor='facebook.500' type={!show ? 'password' : 'text'} placeholder='password' h={14} />
-					<InputRightElement pt={4}>
-						<Icon fontSize={'xl'} as={!show ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShow} />
-					</InputRightElement>
-				</InputGroup>
-			</FormControl>
-			<FormControl isRequired>
-				<FormLabel>Confirm Password</FormLabel>
 
-				<InputGroup>
-					<Input focusBorderColor='facebook.500' type={!showConfirm ? 'password' : 'text'} placeholder='****' h={14} />
-					<InputRightElement pt={4}>
-						<Icon
-							fontSize={'xl'}
-							as={!showConfirm ? AiOutlineEye : AiOutlineEyeInvisible}
-							cursor={'pointer'}
-							onClick={toggleShowConfirm}
-						/>
-					</InputRightElement>
-				</InputGroup>
-			</FormControl>
-			<Button
-				mt={4}
-				w={'full'}
-				bgGradient='linear(to-r, facebook.400, gray.400)'
-				color={'white'}
-				_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
-				h={14}
-				onClick={onForm3Submit}
+			<Formik
+				onSubmit={onForm3Submit}
+				initialValues={{ password: '', confirmPassword: '' }}
+				validationSchema={AuthValidation.editPassword}
 			>
-				{t('account_recovery_btn_form3', { ns: 'global' })}
-			</Button>
+				<Form>
+					<TextField
+						name='password'
+						label={t('login_input_password_label', { ns: 'global' })}
+						type={!show ? 'password' : 'text'}
+						placeholder={'****'}
+					>
+						<InputRightElement pt={4}>
+							<Icon fontSize={'xl'} as={!show ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShow} />
+						</InputRightElement>
+					</TextField>
+
+					<TextField
+						name='confirmPassword'
+						label={t('register_input_confirm_password_label', { ns: 'global' })}
+						type={!showConfirm ? 'password' : 'text'}
+						placeholder='****'
+					>
+						<InputRightElement pt={4}>
+							<Icon
+								fontSize={'xl'}
+								as={!showConfirm ? AiOutlineEye : AiOutlineEyeInvisible}
+								cursor={'pointer'}
+								onClick={toggleShowConfirm}
+							/>
+						</InputRightElement>
+					</TextField>
+					<Button
+						mt={4}
+						w={'full'}
+						bgGradient='linear(to-r, facebook.400, gray.400)'
+						color={'white'}
+						_hover={{ bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl' }}
+						h={14}
+						type={'submit'}
+						isLoading={isLoading}
+						loadingText={'Loading...'}
+					>
+						{t('account_recovery_btn_form3', { ns: 'global' })}
+					</Button>
+				</Form>
+			</Formik>
 		</>
 	);
 	return (

@@ -59,6 +59,19 @@ export const verifyVerificationCode = createAsyncThunk<
 	}
 });
 
+export const editProfilePassword = createAsyncThunk<'Success', { email: string; password: string; callback: () => void }>(
+	'auth/edit-user',
+	async ({ email, password, callback }, thunkApi) => {
+		try {
+			const response = await AuthService.editProfilePassword(email, password);
+			callback();
+			return response.data;
+		} catch (error) {
+			return thunkApi.rejectWithValue(errorCatch(error));
+		}
+	}
+);
+
 export const checkAuth = createAsyncThunk<AuthUserResponse>('auth/check-auth', async (_, thunkApi) => {
 	try {
 		const response = await AuthService.getNewTokens();

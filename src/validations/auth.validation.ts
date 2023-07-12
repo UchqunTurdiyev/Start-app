@@ -31,4 +31,13 @@ export const AuthValidation = {
 			email: Yup.string().email('Email is invalid').required('Email is required'),
 		});
 	},
+
+	editPassword() {
+		return Yup.object({
+			password: Yup.string().min(6, 'Password should be min 6 charakteres').required('Password is required'),
+			confirmPassword: Yup.string()
+				.oneOf([Yup.ref('password')], "Password doesn't same")
+				.required('Confirm password is required'),
+		});
+	},
 };

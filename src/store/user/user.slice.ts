@@ -1,4 +1,12 @@
-import { checkAuth, login, logout, register, sendVerificationCode, verifyVerificationCode } from './user.action';
+import {
+	checkAuth,
+	editProfilePassword,
+	login,
+	logout,
+	register,
+	sendVerificationCode,
+	verifyVerificationCode,
+} from './user.action';
 import { InterfacesEmailAndPassword, UserInitialStateType } from './user.interface';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
@@ -67,6 +75,18 @@ export const userSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(verifyVerificationCode.rejected, (state, { payload }) => {
+				state.isLoading = false;
+				state.error = payload;
+			})
+			.addCase(editProfilePassword.pending, state => {
+				state.isLoading = true;
+				state.error = null;
+			})
+			.addCase(editProfilePassword.fulfilled, state => {
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(editProfilePassword.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				state.error = payload;
 			})
