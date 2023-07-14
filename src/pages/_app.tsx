@@ -12,10 +12,11 @@ import 'react-multi-carousel/lib/styles.css';
 import '../styles/globals.css';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
+import { SessionProvider } from 'next-auth/react';
 
 NProgress.configure({ showSpinner: false });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 	useEffect(() => {
 		const handleRouteStart = () => NProgress.start();
 		const handleRouteDone = () => NProgress.done();
@@ -33,13 +34,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<HydrationProvider>
 			<Provider store={store}>
-				<I18nextProvider i18n={i18n}>
-					<ChakraProvider>
-						<Client>
-							<Component {...pageProps} />
-						</Client>
-					</ChakraProvider>
-				</I18nextProvider>
+				<SessionProvider session={session}>
+					<I18nextProvider i18n={i18n}>
+						<ChakraProvider>
+							<Client>
+								<Component {...pageProps} />
+							</Client>
+						</ChakraProvider>
+					</I18nextProvider>
+				</SessionProvider>
 			</Provider>
 		</HydrationProvider>
 	);

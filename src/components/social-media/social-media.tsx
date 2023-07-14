@@ -2,9 +2,14 @@ import { Box, Button, Center, HStack, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { signIn } from 'next-auth/react';
 
 export default function SocialMedia() {
 	const { t } = useTranslation();
+
+	const google = () => {
+		signIn('google', { callbackUrl: `${process.env.NEXT_PUBLIC_CLIENT_DOMAIN}` });
+	};
 	return (
 		<>
 			<Box
@@ -40,7 +45,7 @@ export default function SocialMedia() {
 					</Center>
 				</Button>
 
-				<Button w={'full'} colorScheme={'red'} variant={'outline'} leftIcon={<FaGoogle />}>
+				<Button onClick={google} w={'full'} colorScheme={'red'} variant={'outline'} leftIcon={<FaGoogle />}>
 					<Center>
 						<Text>Google</Text>
 					</Center>
