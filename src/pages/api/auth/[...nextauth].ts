@@ -1,6 +1,10 @@
+import { API_URL, getAuthUrl } from '@/config/api.config';
+import { AuthService } from '@/servises/auth.service';
+import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import GithupProvider from 'next-auth/providers/github';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
 	return nextAuth(req, res, {
@@ -9,14 +13,25 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 				clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
 				clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string,
 			}),
+			GithupProvider({
+				clientId: process.env.NEXT_PUBLIC_GITHUP_CLIENT_ID as string,
+				clientSecret: process.env.NEXT_PUBLIC_GITHUP_CLIENT_SECRET as string,
+			}),
 		],
 		secret: process.env.NEXT_PUBLIC_SECRET_AUTH,
 		callbacks: {
 			async signIn({ user }) {
 				if (user) {
-					return 'success';
+					const email = user.email as string;
+					const checkUser = await AuthService.chechUser(email);
+					if (checkUser === 'user') {
+						await AuthService.login(email, '');
+					} else if (checkUser === 'no-user') {
+						await AuthService.register(email, '');
+					}
+					return true;
 				}
-				return 'success !';
+				return false;
 			},
 		},
 	});
