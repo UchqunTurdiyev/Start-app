@@ -5,6 +5,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import nextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import GithupProvider from 'next-auth/providers/github';
+import { AuthUserResponse } from '@/store/user/user.interface';
+import { setCookie } from '@/utils/cookies-persistance';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
 	return nextAuth(req, res, {
@@ -25,11 +27,28 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 					const email = user.email as string;
 					const checkUser = await AuthService.chechUser(email);
 					if (checkUser === 'user') {
-						await AuthService.login(email, '');
+						const response = await axios.post<AuthUserResponse>(`${API_URL}${getAuthUrl('login')}`, {
+							email,
+							password: '',
+						});
+						setCookie(res, 'next-auth.access-token', response.data.accessToken, {
+							path: '/',
+							secure: true,
+							maxAge: 2592000,
+						});
+						return true;
 					} else if (checkUser === 'no-user') {
-						await AuthService.register(email, '');
+						const response = await axios.post<AuthUserResponse>(`${API_URL}${getAuthUrl('register')}`, {
+							email,
+							password: '',
+						});
+						setCookie(res, 'next-auth.access-token', response.data.accessToken, {
+							path: '/',
+							secure: true,
+							maxAge: 2592000,
+						});
+						return true;
 					}
-					return true;
 				}
 				return false;
 			},

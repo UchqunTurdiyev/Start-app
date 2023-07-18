@@ -2,16 +2,14 @@ import { AuthTokens, AuthUserResponse } from '@/store/user/user.interface';
 import Cookies from 'js-cookie';
 
 export const saveTokensCookie = (data: AuthTokens) => {
-	Cookies.set('accessToken', data.accessToken);
-	Cookies.set('refreshToken', data.refreshToken);
+	Cookies.set('next-auth.access-token', data.accessToken);
 };
 
 export const saveStorage = (data: AuthUserResponse) => {
 	saveTokensCookie(data);
-	//localStorage.setItem('user', JSON.stringify(data.user));
 };
 
 export const removeTokensCookie = () => {
-	Cookies.remove('accessToken');
+	Cookies.remove('next-auth.access-token');
 	Cookies.remove('refreshToken');
 };

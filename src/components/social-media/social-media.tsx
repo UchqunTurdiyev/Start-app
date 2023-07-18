@@ -11,7 +11,7 @@ export default function SocialMedia() {
 		signIn('google', { callbackUrl: `${process.env.NEXT_PUBLIC_CLIENT_DOMAIN}` });
 	};
 
-	const githup = () => {
+	const github = () => {
 		signIn('githup', { callbackUrl: `${process.env.NEXT_PUBLIC_CLIENT_DOMAIN}` });
 	};
 	return (
@@ -43,7 +43,7 @@ export default function SocialMedia() {
 				{t('or', { ns: 'global' })}
 			</Box>
 			<HStack>
-				<Button onClick={githup} w={'full'} colorScheme={'gray'} leftIcon={<FaGithub />}>
+				<Button onClick={github} w={'full'} colorScheme={'gray'} leftIcon={<FaGithub />}>
 					<Center>
 						<Text>GitHup</Text>
 					</Center>
