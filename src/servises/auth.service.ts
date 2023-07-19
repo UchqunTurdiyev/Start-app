@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL, getAuthUrl, getMailUrl, getUserUrl } from '@/config/api.config';
 import { AuthUserResponse } from '@/store/user/user.interface';
-import { removeTokensCookie, saveStorage } from '@/helper/auth.helper';
+import { removeTokensCookie, saveTokensCookie } from '@/helper/auth.helper';
 import Cookies from 'js-cookie';
 export const AuthService = {
 	async register(email: string, password: string) {
@@ -10,7 +10,7 @@ export const AuthService = {
 			password,
 		});
 		if (response.data.accessToken) {
-			saveStorage(response.data);
+			saveTokensCookie(response.data);
 		}
 
 		return response;
@@ -22,7 +22,7 @@ export const AuthService = {
 			password,
 		});
 		if (response.data.accessToken) {
-			saveStorage(response.data);
+			saveTokensCookie(response.data);
 		}
 
 		return response;
@@ -51,15 +51,14 @@ export const AuthService = {
 
 	logout() {
 		removeTokensCookie();
-		localStorage.removeItem('user');
 	},
 
 	async getNewTokens() {
-		const refreshToken = Cookies.get('refreshToken');
+		const refreshToken = Cookies.get('refresh');
 		const response = await axios.post(`${API_URL}${getAuthUrl('access')}`, { refreshToken });
 
 		if (response.data.accessToken) {
-			saveStorage(response.data);
+			saveTokensCookie(response.data);
 		}
 
 		return response;

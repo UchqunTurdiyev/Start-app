@@ -6,7 +6,7 @@ import nextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import GithupProvider from 'next-auth/providers/github';
 import { AuthUserResponse } from '@/store/user/user.interface';
-import { setCookie } from '@/utils/cookies-persistance';
+import { serialize } from 'cookie';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
 	return nextAuth(req, res, {
@@ -31,22 +31,21 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 							email,
 							password: '',
 						});
-						setCookie(res, 'next-auth.access-token', response.data.accessToken, {
-							path: '/',
-							secure: true,
-							maxAge: 2592000,
-						});
+						res.setHeader('Set-Cookie', [
+							serialize('access', response.data.accessToken, { secure: true, path: '/' }),
+							serialize('refresh', response.data.refreshToken, { secure: true, path: '/' }),
+						]);
 						return true;
 					} else if (checkUser === 'no-user') {
 						const response = await axios.post<AuthUserResponse>(`${API_URL}${getAuthUrl('register')}`, {
 							email,
 							password: '',
 						});
-						setCookie(res, 'next-auth.access-token', response.data.accessToken, {
-							path: '/',
-							secure: true,
-							maxAge: 2592000,
-						});
+						res.setHeader('Set-Cookie', [
+							serialize('access', response.data.accessToken, { secure: true, path: '/' }),
+							serialize('refresh', response.data.refreshToken, { secure: true, path: '/' }),
+						]);
+
 						return true;
 					}
 				}

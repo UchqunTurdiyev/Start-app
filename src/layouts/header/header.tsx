@@ -1,6 +1,7 @@
 import { language } from '@/config/constants';
 import { DarkLogo, LightLogo } from '@/icons';
 import {
+	Avatar,
 	Box,
 	Button,
 	Flex,
@@ -18,16 +19,25 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { BiMenuAltLeft, BiUserCircle } from 'react-icons/bi';
+import { BiLogOutCircle, BiMenuAltLeft, BiUserCircle } from 'react-icons/bi';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import { MdOutlineContactSupport } from 'react-icons/md';
 import { TbWorld } from 'react-icons/tb';
 import { HeaderProps } from './header.props';
+import { useAuth } from '@/hooks/useAuth';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { ImUserTie } from 'react-icons/im';
+import { FaUserGraduate } from 'react-icons/fa';
+import { FiSettings } from 'react-icons/fi';
+import { IoMdLogOut } from 'react-icons/io';
+import { useActions } from '@/hooks/useActions';
 
 function Header({ onToggle }: HeaderProps) {
 	const { toggleColorMode, colorMode } = useColorMode();
 	const { i18n, t } = useTranslation();
 	const router = useRouter();
+	const { user } = useAuth();
+	const { logout } = useActions();
 
 	const onLanguage = (lng: string) => {
 		// replace ozgartirish uchun routerni
@@ -92,9 +102,41 @@ function Header({ onToggle }: HeaderProps) {
 						colorScheme={'facebook'}
 						variant={'outline'}
 					/>
-					<Button rightIcon={<BiUserCircle />} onClick={() => router.push('/auth')} colorScheme={'facebook'} variant={'solid'}>
-						{t('login', { ns: 'layout' })}
-					</Button>
+					{user ? (
+						<Menu>
+							<MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
+								<Avatar icon={<FaUserGraduate />} backgroundColor={'facebook.500'} />
+							</MenuButton>
+							<MenuList p={0} m={0}>
+								<MenuItem h={14} onClick={() => router.push('/setting')} fontWeight={'bold'} icon={<FiSettings fontSize={17} />}>
+									Settings
+								</MenuItem>
+								<MenuItem onClick={logout} h={14} fontWeight={'bold'} icon={<IoMdLogOut fontSize={17} />}>
+									Logut
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					) : (
+						<>
+							<Button
+								display={{ base: 'none', md: 'flex' }}
+								rightIcon={<BiUserCircle />}
+								onClick={() => router.push('/auth')}
+								colorScheme={'facebook'}
+								variant={'solid'}
+							>
+								{t('login', { ns: 'layout' })}
+							</Button>
+							<IconButton
+								display={{ base: 'flex', md: 'none' }}
+								aria-label='login'
+								onClick={() => router.push('/auth')}
+								icon={<AiOutlineLogin />}
+								colorScheme={'facebook'}
+								variant={'outline'}
+							/>
+						</>
+					)}
 				</HStack>
 			</Flex>
 		</Box>
