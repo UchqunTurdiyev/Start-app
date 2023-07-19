@@ -13,6 +13,7 @@ import '../styles/globals.css';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
 import { SessionProvider } from 'next-auth/react';
+import AuthProvider from '@/provider/auth.provider';
 
 NProgress.configure({ showSpinner: false });
 
@@ -38,7 +39,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 					<I18nextProvider i18n={i18n}>
 						<ChakraProvider>
 							<Client>
-								<Component {...pageProps} />
+								<AuthProvider>
+									<Component {...pageProps} />
+								</AuthProvider>
 							</Client>
 						</ChakraProvider>
 					</I18nextProvider>

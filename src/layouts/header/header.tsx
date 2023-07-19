@@ -45,6 +45,11 @@ function Header({ onToggle }: HeaderProps) {
 		i18n.changeLanguage(lng);
 	};
 
+	const logoutHandler = () => {
+		logout();
+		router.push('/auth');
+	};
+
 	return (
 		<Box
 			zIndex={1001}
@@ -111,7 +116,7 @@ function Header({ onToggle }: HeaderProps) {
 								<MenuItem h={14} onClick={() => router.push('/setting')} fontWeight={'bold'} icon={<FiSettings fontSize={17} />}>
 									Settings
 								</MenuItem>
-								<MenuItem onClick={logout} h={14} fontWeight={'bold'} icon={<IoMdLogOut fontSize={17} />}>
+								<MenuItem onClick={logoutHandler} h={14} fontWeight={'bold'} icon={<IoMdLogOut fontSize={17} />}>
 									Logut
 								</MenuItem>
 							</MenuList>
