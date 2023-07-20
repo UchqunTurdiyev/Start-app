@@ -113,7 +113,12 @@ function Header({ onToggle }: HeaderProps) {
 								<Avatar icon={<FaUserGraduate />} backgroundColor={'facebook.500'} />
 							</MenuButton>
 							<MenuList p={0} m={0}>
-								<MenuItem h={14} onClick={() => router.push('/setting')} fontWeight={'bold'} icon={<FiSettings fontSize={17} />}>
+								<MenuItem
+									h={14}
+									//  onClick={() => router.push('/setting')}
+									fontWeight={'bold'}
+									icon={<FiSettings fontSize={17} />}
+								>
 									Settings
 								</MenuItem>
 								<MenuItem onClick={logoutHandler} h={14} fontWeight={'bold'} icon={<IoMdLogOut fontSize={17} />}>
