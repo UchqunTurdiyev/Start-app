@@ -172,8 +172,8 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			callback: () => {
 				onNavigationStateComponent('login');
 				toast({
-					title: 'Successfully edited ',
-					description: 'You can login to account with new password',
+					title: `${t('successfully_edited', { ns: 'global' })}`,
+					description: `${t('login_with_new_password', { ns: 'global' })}`,
 					status: 'success',
 					position: 'top-right',
 					isClosable: true,

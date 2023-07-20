@@ -37,7 +37,7 @@ export default function Verefication() {
 					password: user?.password as string,
 					callback: () => {
 						router.push('/');
-						toast({ title: 'Successfully logged in', position: 'top-right', isClosable: true });
+						toast({ title: `${t('successfully_logged', { ns: 'global' })}`, position: 'top-right', isClosable: true });
 					},
 				});
 			},

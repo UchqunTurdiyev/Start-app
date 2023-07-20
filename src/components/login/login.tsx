@@ -44,7 +44,12 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 			password: formData.password,
 			callback: () => {
 				router.push('/');
-				toast({ title: 'Successfully logged in', status: 'info', isClosable: true, position: 'top-right' });
+				toast({
+					title: `${t('successfully_logged', { ns: 'global' })}`,
+					status: 'info',
+					isClosable: true,
+					position: 'top-right',
+				});
 			},
 		});
 	};
@@ -64,13 +69,13 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('login_description', { ns: 'global' })}
 			</Text>
+			<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 			<Formik onSubmit={onSubmit} initialValues={{ email: '', password: '' }} validationSchema={AuthValidation.login}>
 				<Form>
-					<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 					<TextField
 						name='email'
 						type='text'
-						label={t('login_input_password_label', { ns: 'global' })}
+						label={t('login_input_email_label', { ns: 'global' })}
 						placeholder={'info@gmail.com'}
 					/>
 					<TextField

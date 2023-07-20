@@ -119,10 +119,10 @@ function Header({ onToggle }: HeaderProps) {
 									fontWeight={'bold'}
 									icon={<FiSettings fontSize={17} />}
 								>
-									Settings
+									{t('settings', { ns: 'global' })}
 								</MenuItem>
 								<MenuItem onClick={logoutHandler} h={14} fontWeight={'bold'} icon={<IoMdLogOut fontSize={17} />}>
-									Logut
+									{t('logout', { ns: 'global' })}
 								</MenuItem>
 							</MenuList>
 						</Menu>

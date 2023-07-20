@@ -79,7 +79,7 @@
 	"user_not_found": "User not found",
 	"already_exist": "User with that email is already exist in the system",
 	"send_otp_verification": "Please send OTP Verification code",
-	"expire_code": "Expired code, please try again",
+	"expired_code": "Expired code, please try again",
 	"otp_is_incorrect": "OTP verification code is not correct, please check your email",
 	"successfully_logged": "Successfully logged in",
 	"login_with_new_password": "You can login to account with new password",
