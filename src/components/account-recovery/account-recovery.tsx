@@ -35,7 +35,7 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 	const { t } = useTranslation();
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const toast = useToast();
-	const { sendVerificationCode, verifyVerificationCode, editProfilePassword } = useActions();
+	const { sendVerificationCode, verifyVerificationCode, editProfilePassword, clearError } = useActions();
 	const { error, isLoading } = useTypedSelector(state => state.user);
 	const [email, setEmail] = useState<string>('');
 
@@ -66,7 +66,7 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('account_recovery_description_form1', { ns: 'global' })}
 			</Text>
-			<>{error && <ErrorAlert title={error as string} />}</>
+			<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 			<Formik onSubmit={onForm1Submit} initialValues={{ email: '' }} validationSchema={AuthValidation.onlyEmail}>
 				<Form>
 					<TextField
@@ -119,7 +119,7 @@ export default function AccountRecovery({ onNavigationStateComponent }: AccountR
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('account_recovery_description_form2', { ns: 'global' })}
 			</Text>
-			<>{error && <ErrorAlert title={error as string} />}</>
+			<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 
 			<Formik onSubmit={onForm2Submit} initialValues={{ otp: '' }} validationSchema={AuthValidation.otp}>
 				{formik => (

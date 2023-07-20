@@ -33,7 +33,7 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 export default function Register({ onNavigationStateComponent }: RegisterProps) {
 	const { show, toggleShow, toggleShowConfirm, showConfirm } = useShowPassword();
 	const { t } = useTranslation();
-	const { pendingRegister, sendVerificationCode } = useActions();
+	const { pendingRegister, sendVerificationCode, clearError } = useActions();
 	const { error, isLoading } = useTypedSelector(state => state.user);
 
 	const onSubmit = async (formData: InterfacesEmailAndPassword) => {
@@ -69,7 +69,7 @@ export default function Register({ onNavigationStateComponent }: RegisterProps) 
 				validationSchema={AuthValidation.register}
 			>
 				<Form>
-					<>{error && <ErrorAlert title={error as string} />}</>
+					<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 					<TextField
 						name='email'
 						type='text'

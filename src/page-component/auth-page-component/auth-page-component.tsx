@@ -19,15 +19,20 @@ import { avatars } from '@/config/constants';
 import { AccountRecovery, Login, Register, SocialMedia, Verefication } from '@/components';
 
 import { useTranslation } from 'react-i18next';
+import { useActions } from '@/hooks/useActions';
 
 export default function AuthPageComponent() {
 	const [state, setState] = useState<'login' | 'register' | 'verification' | 'account-recovery'>('login');
 	const { t } = useTranslation();
+	const { clearError } = useActions();
 
 	const breakpointValue = useBreakpointValue({ base: 'md', md: 'lg' });
 
-	const onNavigationStateComponent = (component: 'login' | 'register' | 'verification' | 'account-recovery') =>
+	const onNavigationStateComponent = (component: 'login' | 'register' | 'verification' | 'account-recovery') => {
 		setState(component);
+		clearError();
+	};
+
 	const renderStateComponent = () => {
 		switch (state) {
 			case 'login':
