@@ -93,7 +93,7 @@ export default function Verefication() {
 							h={14}
 							type={'submit'}
 							isLoading={isLoading}
-							loadingText={'Loading...'}
+							loadingText={`${t('loading', { ns: 'global' })}`}
 						>
 							{t('verification_btn', { ns: 'global' })}
 						</Button>

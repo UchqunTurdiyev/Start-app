@@ -109,7 +109,7 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 						h={14}
 						type={'submit'}
 						isLoading={isLoading}
-						loadingText={'Loading...'}
+						loadingText={`${t('loading', { ns: 'global' })}`}
 					>
 						{t('login_btn', { ns: 'global' })}
 					</Button>

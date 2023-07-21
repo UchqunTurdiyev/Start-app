@@ -84,6 +84,7 @@ function Header({ onToggle }: HeaderProps) {
 							textTransform={'capitalize'}
 							colorScheme={'facebook'}
 							variant={'outline'}
+							display={{ base: 'none', md: 'block' }}
 						>
 							{i18n.resolvedLanguage}
 						</MenuButton>
@@ -110,7 +111,7 @@ function Header({ onToggle }: HeaderProps) {
 					{user ? (
 						<Menu>
 							<MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-								<Avatar icon={<FaUserGraduate />} backgroundColor={'facebook.500'} />
+								<Avatar backgroundColor={'facebook.500'} name={user.fullName} src={user.avatar} />
 							</MenuButton>
 							<MenuList p={0} m={0}>
 								<MenuItem

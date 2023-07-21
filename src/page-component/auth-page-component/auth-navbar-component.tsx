@@ -1,6 +1,5 @@
 import { language, navigation } from '@/config/constants';
-import i18n from '@/i18n';
-import { DarkLogo, LightLogo } from '@/icons';
+
 import {
 	Box,
 	Button,
@@ -13,12 +12,11 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
-	Text,
 	useColorMode,
 	useColorModeValue,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import React, { useTransition } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import { TbWorld } from 'react-icons/tb';
@@ -38,13 +36,13 @@ export default function AuthNavbarComponent() {
 					<Link href={'/'}>
 						{colorMode === 'light' ? (
 							<Image
-								w={40}
+								w={32}
 								src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/dark_logo.png'}
 								alt='logo Invest'
 							/>
 						) : (
 							<Image
-								w={40}
+								w={32}
 								src={'https://6459153c9655650068ca2cb3--invest-in-school.netlify.app/light_logo.png'}
 								alt='logo img'
 							/>
@@ -53,7 +51,11 @@ export default function AuthNavbarComponent() {
 					<HStack gap={5}>
 						{navigation[1].links.map(nav => (
 							<Link href={nav.route} key={nav.route}>
-								<Box color={'facebook.300'} _hover={{ textDecoration: 'underline', color: hoverLink }} as='a'>
+								<Box
+									color={'facebook.300'}
+									_hover={{ textDecoration: 'underline', color: hoverLink }}
+									display={{ base: 'none', md: 'flex' }}
+								>
 									{t(nav.label, { ns: 'layout' })}
 								</Box>
 							</Link>
