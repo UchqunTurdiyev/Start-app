@@ -1,6 +1,8 @@
 import SectionTitle from '@/components/section-title/section-title';
+import TextField from '@/components/text-field/text-field';
 import { teachValues } from '@/config/constants';
 import { LaunchCourseIcon, PlanCurriculumIcon, RecordVideoIcon } from '@/icons';
+import { InstructorValidation } from '@/validations/instructor.validation';
 import {
 	Box,
 	Button,
@@ -33,6 +35,7 @@ import {
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { GoVerified } from 'react-icons/go';
 
 const BecomeInstructorPageComponent = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -142,7 +145,7 @@ const BecomeInstructorPageComponent = () => {
 				</CardBody>
 			</Card>
 
-			{/* <Modal isOpen={isOpen} onClose={onClose} size={'4xl'} isCentered={true}>
+			<Modal isOpen={isOpen} onClose={onClose} size={'4xl'} isCentered={true}>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader fontSize={'2xl'}>{t('become_instructor_today', { ns: 'instructor' })}</ModalHeader>
@@ -157,16 +160,16 @@ const BecomeInstructorPageComponent = () => {
 							<ModalBody>
 								<Stack spacing={4}>
 									<Flex gap={4}>
-										<TextFiled name={'firstName'} label={t('first_name', { ns: 'global' })} placeholder={'Ali'} type={'text'} />
-										<TextFiled name={'lastName'} label={t('last_name', { ns: 'global' })} placeholder={'Osman'} type={'text'} />
+										<TextField name={'firstName'} label={t('first_name', { ns: 'global' })} placeholder={'Ali'} type={'text'} />
+										<TextField name={'lastName'} label={t('last_name', { ns: 'global' })} placeholder={'Osman'} type={'text'} />
 									</Flex>
-									<TextFiled
+									<TextField
 										name={'email'}
 										label={t('login_input_email_label', { ns: 'global' })}
 										placeholder={'info@sammi.ac'}
 										type={'email'}
 									/>
-									<TextFiled
+									<TextField
 										name={'socialMedia'}
 										label={`${t('social_media', { ns: 'global' })} (YouTube)`}
 										placeholder={'Link to your lesson'}
@@ -182,7 +185,7 @@ const BecomeInstructorPageComponent = () => {
 						</Form>
 					</Formik>
 				</ModalContent>
-			</Modal> */}
+			</Modal>
 		</Stack>
 	);
 };
