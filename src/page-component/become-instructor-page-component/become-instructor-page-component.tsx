@@ -1,7 +1,12 @@
+import { ErrorAlert } from '@/components';
 import SectionTitle from '@/components/section-title/section-title';
 import TextField from '@/components/text-field/text-field';
 import { teachValues } from '@/config/constants';
+import { useActions } from '@/hooks/useActions';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { LaunchCourseIcon, PlanCurriculumIcon, RecordVideoIcon } from '@/icons';
+import { InstructorType } from '@/interfaces/instructor.interfaces';
+import { InstructorApplyBody } from '@/store/instructor/instructor.interfaces';
 import { InstructorValidation } from '@/validations/instructor.validation';
 import {
 	Box,
@@ -32,7 +37,8 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikConfig } from 'formik';
+import error from 'next/error';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GoVerified } from 'react-icons/go';
@@ -41,15 +47,22 @@ const BecomeInstructorPageComponent = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { t } = useTranslation();
 	const toast = useToast();
+	const { applyInstructor, clearInstructorError } = useActions();
+	const { error, isLoading } = useTypedSelector(state => state.instructor);
 
-	const onSubmit = () => {
-		toast({
-			title: 'Successfully sent',
-			description: "We'll contact with you coming soon",
-			isClosable: true,
-			position: 'top-right',
+	const onSubmit = formData => {
+		applyInstructor({
+			...formData,
+			callback: () => {
+				toast({
+					title: 'Successfully sent',
+					description: "We'll contact with you coming soon",
+					isClosable: true,
+					position: 'top-right',
+				});
+				onClose();
+			},
 		});
-		onClose();
 	};
 
 	return (
@@ -159,6 +172,7 @@ const BecomeInstructorPageComponent = () => {
 						<Form>
 							<ModalBody>
 								<Stack spacing={4}>
+									<>{error && <ErrorAlert title={error as string} clearHandler={clearInstructorError} />}</>
 									<Flex gap={4}>
 										<TextField name={'firstName'} label={t('first_name', { ns: 'global' })} placeholder={'Ali'} type={'text'} />
 										<TextField name={'lastName'} label={t('last_name', { ns: 'global' })} placeholder={'Osman'} type={'text'} />
@@ -178,7 +192,14 @@ const BecomeInstructorPageComponent = () => {
 								</Stack>
 							</ModalBody>
 							<ModalFooter>
-								<Button type='submit' colorScheme={'facebook'} h={14} rightIcon={<GoVerified />}>
+								<Button
+									type='submit'
+									colorScheme={'facebook'}
+									h={14}
+									rightIcon={<GoVerified />}
+									isLoading={isLoading}
+									loadingText={`${t('loading', { ns: 'global' })}`}
+								>
 									{t('send_to_verify_btn', { ns: 'global' })}
 								</Button>
 							</ModalFooter>
