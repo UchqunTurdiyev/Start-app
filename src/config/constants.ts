@@ -383,3 +383,36 @@ export const teachValues = [
 		icon: TeachVal3Icon,
 	},
 ];
+
+export const instructorSidebar = [
+	{
+		name: 'Students',
+		icon: FaUserGraduate,
+		route: 'students',
+	},
+	{
+		name: 'Courses',
+		icon: FaListAlt,
+		route: 'courses',
+	},
+	{
+		name: 'Create course',
+		icon: MdOutlineCreateNewFolder,
+		route: 'create-course',
+	},
+	{
+		name: 'Edit courses',
+		icon: FiEdit,
+		route: 'edit-courses',
+	},
+	{
+		name: 'Draft courses',
+		icon: FaFirstdraft,
+		route: 'draft-courses',
+	},
+	{
+		name: 'Revenue',
+		icon: RiMoneyDollarBoxLine,
+		route: 'revenue',
+	},
+];
