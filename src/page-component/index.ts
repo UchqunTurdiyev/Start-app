@@ -16,3 +16,4 @@ export { default as InstructorCreateCourseComponent } from './instructor-page-co
 export { default as EditPageCourseComponent } from './instructor-page-component/edit-page-course-component';
 export { default as EditDetailedCoursePageComponent } from './instructor-page-component/edit-detailed-course-page-component';
 export { default as InstructorDrafCourseComponent } from './instructor-page-component/draf-course-component';
+export { default as RevenuePageComponent } from './instructor-page-component/revenue-page-component';

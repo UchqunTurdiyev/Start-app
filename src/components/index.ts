@@ -21,3 +21,4 @@ export { default as ErrorAlert } from './error-alert/error-alert';
 export { default as InstructorCoursesCard } from './instructor-course-card/instructor-courses-card';
 export { default as InstructorEditCourseCard } from './instructor-course-card/instructor-edit-course-card';
 export { default as DraftCourseCard } from './draft-course-card/draft-course-card';
+export { default as StatusCard } from './status-card/status-card';
