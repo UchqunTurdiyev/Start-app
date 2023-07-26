@@ -13,3 +13,4 @@ export { default as BecomeInstructorPageComponent } from './become-instructor-pa
 export { default as InstructorStudentsPageComponent } from './instructor-page-component/students-page-component';
 export { default as InstructorCoursesPageComponent } from './instructor-page-component/courses-page-component';
 export { default as InstructorCreateCourseComponent } from './instructor-page-component/create-course-component';
+export { default as EditPageCourseComponent } from './instructor-page-component/edit-page-course-component';
