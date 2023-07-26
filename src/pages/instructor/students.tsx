@@ -1,10 +1,10 @@
 import { withInstructorLayout } from '@/layouts/instructor';
-import { StudentsPageComponent } from '@/page-component';
+import { InstructorStudentsPageComponent } from '@/page-component';
 import { NextPage } from 'next';
 import React from 'react';
 
 const Students: NextPage = () => {
-	return <StudentsPageComponent />;
+	return <InstructorStudentsPageComponent />;
 };
 
 export default withInstructorLayout(Students);
