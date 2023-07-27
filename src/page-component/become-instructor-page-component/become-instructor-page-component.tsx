@@ -50,7 +50,7 @@ const BecomeInstructorPageComponent = () => {
 	const { applyInstructor, clearInstructorError } = useActions();
 	const { error, isLoading } = useTypedSelector(state => state.instructor);
 
-	const onSubmit = formData => {
+	const onSubmit = (formData: any) => {
 		applyInstructor({
 			...formData,
 			callback: () => {
