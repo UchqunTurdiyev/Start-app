@@ -22,3 +22,4 @@ export { default as InstructorCoursesCard } from './instructor-course-card/instr
 export { default as InstructorEditCourseCard } from './instructor-course-card/instructor-edit-course-card';
 export { default as DraftCourseCard } from './draft-course-card/draft-course-card';
 export { default as StatusCard } from './status-card/status-card';
+export { default as InstructorManageCourse } from './instructor-manage-course/instructor-manage-course';

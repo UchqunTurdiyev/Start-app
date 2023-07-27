@@ -1,4 +1,5 @@
 import { withInstructorLayout } from '@/layouts/instructor';
+import { GetServerSideProps } from 'next';
 import React from 'react';
 
 function InstructorPage() {
@@ -6,3 +7,12 @@ function InstructorPage() {
 }
 
 export default withInstructorLayout(InstructorPage);
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	return {
+		redirect: {
+			destination: '/instructor/students',
+			permanent: false,
+		},
+	};
+};
