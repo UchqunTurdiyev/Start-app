@@ -61,7 +61,7 @@ const InstructorManageCourse = () => {
 										/>
 									</Box>
 									<Button w={'full'} type='submit' h={14} colorScheme={'facebook'} rightIcon={<GiSave />}>
-										Create course.
+										Create course
 									</Button>
 								</Stack>
 							</Box>

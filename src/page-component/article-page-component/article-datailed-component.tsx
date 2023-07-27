@@ -30,7 +30,7 @@ function ArticleDetailedComponent({ article }: ArticleDetailedProps) {
 							h={'full'}
 						>
 							<Heading>{article.title}</Heading>
-							<Text>{article.excerpt}</Text>
+							<Text>{article.excerp}</Text>
 							<HStack>
 								<Avatar src={article.author.avatar.url} />
 								<Box>
