@@ -1,8 +1,9 @@
-import { FormikProps } from 'formik';
+import { FormikProps, ErrorMessage } from 'formik';
 
 export interface TagFieldProps {
 	label: string;
 	name: string;
 	placeholder: string;
 	formik: FormikProps<any>;
+	errorMessage: string;
 }

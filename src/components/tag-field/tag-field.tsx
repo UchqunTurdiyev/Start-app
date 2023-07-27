@@ -1,9 +1,9 @@
-import { Box, FormLabel } from '@chakra-ui/react';
+import { Box, FormLabel, Text } from '@chakra-ui/react';
 import React from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import { TagFieldProps } from './tag-field.props';
 
-const TagField = ({ formik, label, name, placeholder }: TagFieldProps) => {
+const TagField = ({ formik, label, name, placeholder, errorMessage }: TagFieldProps) => {
 	return (
 		<Box w={'full'}>
 			<FormLabel>
@@ -18,6 +18,11 @@ const TagField = ({ formik, label, name, placeholder }: TagFieldProps) => {
 				name={name}
 				placeHolder={placeholder}
 			/>
+			{errorMessage && (
+				<Text mt={2} fontSize={'14px'} color={'red.600'}>
+					{errorMessage}
+				</Text>
+			)}
 		</Box>
 	);
 };
