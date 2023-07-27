@@ -21,24 +21,31 @@ import { courses, coursesFilter } from '@/config/constants';
 import ReactStars from 'react-stars';
 import { FilterItemProps } from './course-component-page.props';
 import { AllCoursesCard } from '@/components';
-import {useTranslation} from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 function CoursePageComponent() {
-	const {t} = useTranslation();
+	const { t } = useTranslation();
 
 	// @ts-ignore
 	return (
 		<>
-			<SectionTitle title={t('title', {ns: 'course'})} subtitle={t('description', {ns: 'course'})} />
+			<SectionTitle title={t('title', { ns: 'course' })} subtitle={t('description', { ns: 'course' })} />
 			<Box pos={'relative'}>
-				<Input h={14} w={'full'} bg={'white'} color={'gray.900'} placeholder={t('search_input_placeholder', {ns: 'course'}) || ''} _placeholder={{ color: 'gray.500' }} />
+				<Input
+					h={14}
+					w={'full'}
+					bg={'white'}
+					color={'gray.900'}
+					placeholder={t('search_input_placeholder', { ns: 'course' }) || ''}
+					_placeholder={{ color: 'gray.500' }}
+				/>
 				<Button colorScheme={'facebook'} pos={'absolute'} top={2} right={2} zIndex={999}>
-					{t('search_input_btn', {ns: 'course'}) || ''}
+					{t('search_input_btn', { ns: 'course' }) || ''}
 				</Button>
 			</Box>
-			<Flex mt={5} gap={5} direction={{base: 'column', lg:'row'}}>
+			<Flex mt={5} gap={5} direction={{ base: 'column', lg: 'row' }}>
 				<Box
-					w={{base: '100%', lg: '30%'}}
+					w={{ base: '100%', lg: '30%' }}
 					h={'fit-content'}
 					p={5}
 					border={'1px'}
@@ -49,7 +56,7 @@ function CoursePageComponent() {
 						<FilterItem item={item} idx={idx} key={item.id} />
 					))}
 				</Box>
-				<Box w={{base: '100%', md: '70%'}}>
+				<Box w={{ base: '100%', md: '70%' }}>
 					{courses.map(item => (
 						<AllCoursesCard key={item.title} course={item} />
 					))}
@@ -62,7 +69,7 @@ function CoursePageComponent() {
 export default CoursePageComponent;
 
 const FilterItem = ({ item, idx }: { item: FilterItemProps; idx: number }) => {
-	const {t} = useTranslation();
+	const { t } = useTranslation();
 
 	const renderFilter = () => (
 		<>
@@ -70,7 +77,7 @@ const FilterItem = ({ item, idx }: { item: FilterItemProps; idx: number }) => {
 				<Radio key={c.id} value={c.id} colorScheme={'facebook'}>
 					<Flex>
 						{item.id == 'rating' && <ReactStars value={Number(c.id)} edit={false} color2={'#e59819'} />}
-						{t(c.name, {ns: 'course'})}
+						{t(c.name, { ns: 'course' })}
 					</Flex>
 				</Radio>
 			))}
@@ -81,7 +88,7 @@ const FilterItem = ({ item, idx }: { item: FilterItemProps; idx: number }) => {
 			<AccordionItem borderTop={'none'}>
 				<AccordionButton>
 					<Text fontSize={'xl'} flex='1' textAlign='left'>
-						{t(item.title, {ns: 'course'})}
+						{t(item.title, { ns: 'course' })}
 					</Text>
 					<AccordionIcon />
 				</AccordionButton>

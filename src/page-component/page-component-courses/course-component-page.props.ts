@@ -1,10 +1,10 @@
 export interface FilterItemProps {
-    title: string,
-    id: string,
-    CategoryList: CategoryListProps[]
+	title: string;
+	id: string;
+	categoryList: CategoryListProps[];
 }
 
 export interface CategoryListProps {
-    name: string,
-    id: string
+	name: string;
+	id: string;
 }
