@@ -16,21 +16,25 @@ import TagField from '../tag-field/tag-field';
 import { CourseValidation, manageCourseValues } from '@/validations/cours.validation';
 import { InstructorManageCourseProps, SubmitValuesInterface } from './instructor-manage-course.props';
 import { fileService } from '@/servises/file.service';
+import { useActions } from '@/hooks/useActions';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCourseProps) => {
 	const [file, setFile] = useState<File>();
+	const { createCourse } = useActions();
 	const handleChange = (file: File) => {
 		setFile(file);
 	};
 
 	const onSubmit = async (formValues: FormikValues) => {
-		const formData = new FormData();
-		formData.append('image', file as File);
-		const response = await fileService.fileUpload(formData, 'preview-image');
-		console.log(response);
+		if (file) {
+			const formData = new FormData();
+			formData.append('image', file as File);
+			await fileService.fileUpload(formData, 'preview-image');
+		}
 		const data = formValues as SubmitValuesInterface;
+		createCourse({ ...data, callback: () => console.log('Success') });
 		submitHandler(data);
 	};
 
@@ -51,7 +55,7 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 											name='learn'
 											placeholder='Full project...'
 											formik={formik}
-											errorMessage={formik.errors.learn as string}
+											errorMessage={formik.touched.learn ? (formik.errors.learn as string) : ''}
 										/>
 
 										<TagField
@@ -59,7 +63,7 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 											name='requirements'
 											placeholder='Basic JavaScript...'
 											formik={formik}
-											errorMessage={formik.errors.requirements as string}
+											errorMessage={formik.touched.requirements ? (formik.errors.requirements as string) : ''}
 										/>
 									</Flex>
 									<Box>
@@ -96,7 +100,7 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 										name='tags'
 										placeholder='JavaScript...'
 										formik={formik}
-										errorMessage={formik.errors.tags as string}
+										errorMessage={formik.touched.tags ? (formik.errors.tags as string) : ''}
 									/>
 
 									<Box>
