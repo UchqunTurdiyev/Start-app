@@ -15,6 +15,7 @@ import SelectField from '../select-field/select-field';
 import TagField from '../tag-field/tag-field';
 import { CourseValidation, manageCourseValues } from '@/validations/cours.validation';
 import { InstructorManageCourseProps, SubmitValuesInterface } from './instructor-manage-course.props';
+import { fileService } from '@/servises/file.service';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -24,8 +25,12 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 		setFile(file);
 	};
 
-	const onSubmit = (formData: FormikValues) => {
-		const data = formData as SubmitValuesInterface;
+	const onSubmit = async (formValues: FormikValues) => {
+		const formData = new FormData();
+		formData.append('image', file as File);
+		const response = await fileService.fileUpload(formData, 'preview-image');
+		console.log(response);
+		const data = formValues as SubmitValuesInterface;
 		submitHandler(data);
 	};
 
