@@ -1,9 +1,7 @@
-import { InstructorService } from '@/servises/instructor.service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { InstructorApplyBody } from '../instructor/instructor.interfaces';
-import { errorCatch } from '@/helper/api.helper';
 import { CourseCreateBodyInterface } from './course.interfaces';
 import { CourseService } from '@/servises/course.service';
+import { errorCatch } from '@/helper/api.helper';
 
 export const createCourse = createAsyncThunk<'Success', CourseCreateBodyInterface>('course/create', async (body, thunkApi) => {
 	try {
