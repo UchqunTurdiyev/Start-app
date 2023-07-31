@@ -1,6 +1,6 @@
-import { AuthService } from '@/servises/auth.service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthUserResponse } from './user.interface';
+import { AuthService } from '@/servises/auth.service';
 import { errorCatch } from '@/helper/api.helper';
 
 export const register = createAsyncThunk<AuthUserResponse, { password: string; email: string; callback: () => void }>(
@@ -28,10 +28,6 @@ export const login = createAsyncThunk<AuthUserResponse, { password: string; emai
 		}
 	}
 );
-
-export const logout = createAsyncThunk('auth/logout', () => {
-	AuthService.logout();
-});
 
 export const sendVerificationCode = createAsyncThunk<'Success', { email: string; isUser: boolean; callback: () => void }>(
 	'auth/verification-code',
@@ -71,6 +67,10 @@ export const editProfilePassword = createAsyncThunk<'Success', { email: string; 
 		}
 	}
 );
+
+export const logout = createAsyncThunk('auth/logout', () => {
+	AuthService.logout();
+});
 
 export const checkAuth = createAsyncThunk<AuthUserResponse>('auth/check-auth', async (_, thunkApi) => {
 	try {

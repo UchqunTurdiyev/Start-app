@@ -1,3 +1,4 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	checkAuth,
 	editProfilePassword,
@@ -7,10 +8,9 @@ import {
 	sendVerificationCode,
 	verifyVerificationCode,
 } from './user.action';
-import { InterfacesEmailAndPassword, UserInitialStateType } from './user.interface';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { InterfaceEmailAndPassword, UserIntialStateType } from './user.interface';
 
-const initialState: UserInitialStateType = {
+const initialState: UserIntialStateType = {
 	user: null,
 	isLoading: false,
 	error: null,
@@ -20,8 +20,11 @@ export const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		pendingRegister: (state, action: PayloadAction<InterfacesEmailAndPassword>) => {
-			state.user = { email: action.payload.email, password: action.payload.password };
+		pendingRegister: (state, action: PayloadAction<InterfaceEmailAndPassword>) => {
+			state.user = {
+				email: action.payload.email,
+				password: action.payload.password,
+			};
 		},
 		clearError: state => {
 			state.error = null;
@@ -32,17 +35,17 @@ export const userSlice = createSlice({
 			.addCase(register.pending, state => {
 				state.isLoading = true;
 				state.error = null;
-			}) // serverga sorov yuborish
+			})
 			.addCase(register.fulfilled, (state, { payload }) => {
 				state.isLoading = false;
 				state.user = payload.user;
 				state.error = null;
-			}) // serverga sorov muvofaqiyatli tugadi
+			})
 			.addCase(register.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				state.user = null;
 				state.error = payload;
-			}) // serverga sorov muvofaqiyatsiz tugari
+			})
 			.addCase(login.pending, state => {
 				state.isLoading = true;
 				state.error = null;
@@ -98,7 +101,6 @@ export const userSlice = createSlice({
 				state.user = null;
 			})
 			.addCase(checkAuth.fulfilled, (state, { payload }) => {
-				state.isLoading = false;
 				state.user = payload.user;
 			});
 	},

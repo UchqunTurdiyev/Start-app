@@ -1,6 +1,6 @@
 import { UserType } from '@/interfaces/user.interfaces';
 
-export interface UserInitialStateType {
+export interface UserIntialStateType {
 	user: UserType | null;
 	isLoading: boolean;
 	error: string | null | unknown;
@@ -15,7 +15,7 @@ export interface AuthUserResponse extends AuthTokens {
 	user: UserType;
 }
 
-export interface InterfacesEmailAndPassword {
+export interface InterfaceEmailAndPassword {
 	password: string;
 	email: string;
 }
