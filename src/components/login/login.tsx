@@ -25,8 +25,8 @@ import { Form, Formik } from 'formik';
 import { AuthValidation } from '@/validations/auth.validation';
 import ErrorAlert from '../error-alert/error-alert';
 import TextField from '../text-field/text-field';
-import { InterfacesEmailAndPassword } from '@/store/user/user.interface';
 import { useRouter } from 'next/router';
+import { InterfaceEmailAndPassword } from '@/store/user/user.interface';
 
 export default function Login({ onNavigationStateComponent }: LoginProps) {
 	const [show, setShow] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export default function Login({ onNavigationStateComponent }: LoginProps) {
 
 	const toggleShow = () => setShow(prev => !prev);
 
-	const onSubmit = (formData: InterfacesEmailAndPassword) => {
+	const onSubmit = (formData: InterfaceEmailAndPassword) => {
 		login({
 			email: formData.email,
 			password: formData.password,

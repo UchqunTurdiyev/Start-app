@@ -1,10 +1,8 @@
-import SectionTitle from '@/components/section-title/section-title';
-import { Divider, useToast } from '@chakra-ui/react';
-
-import 'react-quill/dist/quill.snow.css';
 import { InstructorManageCourse } from '@/components';
 import { SubmitValuesInterface } from '@/components/instructor-manage-course/instructor-manage-course.props';
+import SectionTitle from '@/components/section-title/section-title';
 import { useActions } from '@/hooks/useActions';
+import { Divider, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 const CreateCourseComponent = () => {
@@ -26,6 +24,7 @@ const CreateCourseComponent = () => {
 			},
 		});
 	};
+
 	return (
 		<>
 			<SectionTitle title='Create course' subtitle="Note that when you're creating course it will be draft" />

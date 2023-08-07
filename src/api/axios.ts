@@ -1,14 +1,14 @@
 import { API_URL } from '@/config/api.config';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import { errorCatch } from '@/helper/api.helper';
 import { removeTokensCookie } from '@/helper/auth.helper';
 import { AuthService } from '@/servises/auth.service';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-export const $axios = axios.create({
+const $axios = axios.create({
 	baseURL: API_URL,
 	headers: {
-		'Content-type': 'aplication/json',
+		'Content-Type': 'application/json',
 	},
 });
 

@@ -1,4 +1,4 @@
-import { AuthTokens, AuthUserResponse } from '@/store/user/user.interface';
+import { AuthTokens } from '@/store/user/user.interface';
 import Cookies from 'js-cookie';
 
 export const saveTokensCookie = (data: AuthTokens) => {

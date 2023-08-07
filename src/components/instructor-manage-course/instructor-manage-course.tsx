@@ -57,8 +57,7 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 							<Box w={'70%'}>
 								<Stack spacing={5}>
 									<TextField name='title' label='Title' placeholder='JavaScript from 0 to hero' />
-									<TextAreaField name='exerpt' placeholder='Full course about JavaScript' height='150px' label='Exerpt' />
-
+									<TextAreaField name='exerpt' placeholder='Full course about JavaScript' height={'150px'} label={'Exerpt'} />
 									<Flex gap={4}>
 										<TagField
 											label='What will students learn in your course?'
@@ -67,7 +66,6 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 											formik={formik}
 											errorMessage={formik.touched.learn ? (formik.errors.learn as string) : ''}
 										/>
-
 										<TagField
 											label='Requirements'
 											name='requirements'
@@ -89,16 +87,15 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 											value={formik.values.description}
 										/>
 										{formik.errors.description && formik.touched.description && (
-											<Text mt={2} fontSize={'14px'} color={'red.600'}>
+											<Text mt={2} fontSize='14px' color='red.500'>
 												{formik.errors.description as string}
 											</Text>
 										)}
 									</Box>
 									<>{error && <ErrorAlert title={error as string} clearHandler={clearCourseError} />}</>
-
 									<Button
 										w={'full'}
-										type='submit'
+										type={'submit'}
 										h={14}
 										colorScheme={'facebook'}
 										rightIcon={<GiSave />}
@@ -114,7 +111,6 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 									<SelectField name='level' label='Level' placeholder='-' arrOptions={courseLevel} />
 									<SelectField name='category' label='Category' placeholder='-' arrOptions={courseCategory} />
 									<SelectField name='price' label='Price' placeholder='-' arrOptions={coursePrice} />
-
 									<TagField
 										label='Course tags'
 										name='tags'
@@ -122,7 +118,6 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 										formik={formik}
 										errorMessage={formik.touched.tags ? (formik.errors.tags as string) : ''}
 									/>
-
 									<Box>
 										<FormLabel>
 											Course preview image{' '}
@@ -134,7 +129,7 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 											handleChange={handleChange}
 											name='file'
 											types={['JPG', 'PNG', 'GIF']}
-											style={{ minWidth: '100%', height: '180px', borderColor: '1px dashed #375896' }}
+											style={{ minWidth: '100%' }}
 										/>
 										{errorFile && (
 											<Text mt={2} fontSize='14px' color='red.500'>
