@@ -1,6 +1,10 @@
-export interface InstructorInitialStateType {
+import { CourseType } from '@/interfaces/course.interfaces';
+
+export interface InstructorIntialStateType {
 	isLoading: boolean;
 	error: string | null | unknown;
+	courses: CourseType[];
+	course: CourseType | null;
 }
 
 export interface InstructorApplyBody {

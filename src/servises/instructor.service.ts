@@ -1,4 +1,4 @@
-import { $axios } from '@/api/axios';
+import $axios from '@/api/axios';
 import { InstructorApplyBody } from '@/store/instructor/instructor.interfaces';
 import axios from 'axios';
 import { API_URL, getInstructorurl } from '@/config/api.config';

@@ -4,6 +4,8 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import { LayoutProps } from '../layout.props';
 import InstructorSidebar from '../sidebar/instructor.sidebar';
+import InstructorProvider from '@/provider/instructor.provider';
+import { InstructorProvideProps } from './instructor.props';
 
 const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
 	const [toggle, setToggle] = useState<boolean>(false);
@@ -24,11 +26,15 @@ const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
 
 export default Layout;
 
-export const withInstructorLayout = <T extends Record<string, unknown>>(Component: FunctionComponent<T>) => {
+export const withInstructorLayout = <T extends Record<string, unknown> & InstructorProvideProps>(
+	Component: FunctionComponent<T>
+) => {
 	return function withLayoutComponent(props: T): JSX.Element {
 		return (
 			<Layout>
-				<Component {...props} />
+				<InstructorProvider course={props.course} courses={props.courses}>
+					<Component {...props} />
+				</InstructorProvider>
 			</Layout>
 		);
 	};

@@ -1,10 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { InstructorInitialStateType } from './instructor.interfaces';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CourseType } from '@/interfaces/course.interfaces';
 import { applyInstructor } from './instructor.actions';
+import { InstructorIntialStateType } from './instructor.interfaces';
 
-const initialState: InstructorInitialStateType = {
+const initialState: InstructorIntialStateType = {
 	isLoading: false,
 	error: null,
+	courses: [],
+	course: null,
 };
 
 export const instructorSlice = createSlice({
@@ -14,21 +17,27 @@ export const instructorSlice = createSlice({
 		clearInstructorError: state => {
 			state.error = null;
 		},
+		instructorAllCourses: (state, action: PayloadAction<CourseType[]>) => {
+			state.courses = action.payload;
+		},
+		instructorDetailedCourse: (state, action: PayloadAction<CourseType>) => {
+			state.course = action.payload;
+		},
 	},
 	extraReducers: builder => {
 		builder
 			.addCase(applyInstructor.pending, state => {
 				state.isLoading = true;
 				state.error = null;
-			}) // serverga sorov yuborish
+			})
 			.addCase(applyInstructor.fulfilled, state => {
 				state.isLoading = false;
 				state.error = null;
-			}) // serverga sorov muvofaqiyatli tugadi
+			})
 			.addCase(applyInstructor.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				state.error = payload;
-			}); // serverga sorov muvofaqiyatsiz tugari;
+			});
 	},
 });
 
