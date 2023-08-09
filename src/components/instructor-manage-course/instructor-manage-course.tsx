@@ -1,32 +1,34 @@
-import SectionTitle from '@/components/section-title/section-title';
-import { Box, Button, Divider, Flex, FormControl, FormLabel, Input, Select, Stack, Text, Textarea } from '@chakra-ui/react';
-import { GiSave } from 'react-icons/gi';
-import { TagsInput } from 'react-tag-input-component';
-import 'react-quill/dist/quill.snow.css';
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
-import { editorModules } from '@/config/editor.config';
-import { courseCategory, courseLevel, coursePrice } from '@/config/constants';
-import { FileUploader } from 'react-drag-drop-files';
+import { Box, Button, Flex, FormLabel, Icon, Stack, Text } from '@chakra-ui/react';
 import { Form, Formik, FormikValues } from 'formik';
-import TextField from '../text-field/text-field';
-import TextAreaField from '../text-area-field/text-area-field';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { FileUploader } from 'react-drag-drop-files';
+import { useTranslation } from 'react-i18next';
+import { FaTimes } from 'react-icons/fa';
+import { GiSave } from 'react-icons/gi';
+import 'react-quill/dist/quill.snow.css';
+
+import ErrorAlert from '../error-alert/error-alert';
 import SelectField from '../select-field/select-field';
 import TagField from '../tag-field/tag-field';
-import { CourseValidation, manageCourseValues } from '@/validations/cours.validation';
+import TextAreaField from '../text-area-field/text-area-field';
 import { InstructorManageCourseProps, SubmitValuesInterface } from './instructor-manage-course.props';
-
-import { useActions } from '@/hooks/useActions';
+import { CourseValidation, manageCourseValues } from '@/validations/cours.validation';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { useTranslation } from 'react-i18next';
-import ErrorAlert from '../error-alert/error-alert';
+import { useActions } from '@/hooks/useActions';
 import { FileService } from '@/servises/file.service';
+import { editorModules } from '@/config/editor.config';
+import { courseCategory, courseLevel, coursePrice } from '@/config/constants';
+import { loadImage } from '@/helper/image.helper';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCourseProps) => {
-	const [file, setFile] = useState<File>();
+const InstructorManageCourse = ({ submitHandler, titleBtn, courseValues }: InstructorManageCourseProps) => {
+	const [file, setFile] = useState<File | string | null>();
 	const [errorFile, setErrorFile] = useState('');
+	const [initialValues, setInitialValues] = useState(manageCourseValues);
+
 	const { error, isLoading } = useTypedSelector(state => state.course);
 	const { t } = useTranslation();
 	const { clearCourseError, startLoading } = useActions();
@@ -48,20 +50,28 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 		submitHandler(data);
 	};
 
+	useEffect(() => {
+		if (courseValues) {
+			setInitialValues(courseValues);
+			setFile(courseValues.previewImage);
+		}
+	}, [courseValues]);
+
 	return (
 		<>
-			<Formik onSubmit={onSubmit} initialValues={manageCourseValues} validationSchema={CourseValidation.create}>
+			<Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={CourseValidation.create} enableReinitialize>
 				{formik => (
 					<Form>
 						<Flex mt={12} gap={4}>
 							<Box w={'70%'}>
 								<Stack spacing={5}>
-									<TextField name='title' label='Title' placeholder='JavaScript from 0 to hero' />
+									<TextAreaField name='title' label='Title' placeholder='JavaScript from 0 to hero' />
 									<TextAreaField name='exerpt' placeholder='Full course about JavaScript' height={'150px'} label={'Exerpt'} />
 									<Flex gap={4}>
 										<TagField
 											label='What will students learn in your course?'
 											name='learn'
+											values={formik.values.learn}
 											placeholder='Full project...'
 											formik={formik}
 											errorMessage={formik.touched.learn ? (formik.errors.learn as string) : ''}
@@ -69,6 +79,7 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 										<TagField
 											label='Requirements'
 											name='requirements'
+											values={formik.values.requirements}
 											placeholder='Basic JavaScript...'
 											formik={formik}
 											errorMessage={formik.touched.requirements ? (formik.errors.requirements as string) : ''}
@@ -114,29 +125,50 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 									<TagField
 										label='Course tags'
 										name='tags'
+										values={formik.values.tags}
 										placeholder='JavaScript...'
 										formik={formik}
 										errorMessage={formik.touched.tags ? (formik.errors.tags as string) : ''}
 									/>
-									<Box>
-										<FormLabel>
-											Course preview image{' '}
-											<Box as={'span'} color={'red.300'}>
-												*
-											</Box>
-										</FormLabel>
-										<FileUploader
-											handleChange={handleChange}
-											name='file'
-											types={['JPG', 'PNG', 'GIF']}
-											style={{ minWidth: '100%' }}
-										/>
-										{errorFile && (
-											<Text mt={2} fontSize='14px' color='red.500'>
-												{errorFile}
-											</Text>
-										)}
-									</Box>
+									<FormLabel>
+										Course preview image{' '}
+										<Box as={'span'} color={'red.300'}>
+											*
+										</Box>
+									</FormLabel>
+									{file ? (
+										<Box pos={'relative'} w={'full'} h={200}>
+											<Image
+												src={typeof file === 'string' ? loadImage(file as string) : URL.createObjectURL(file)}
+												alt={'preview image'}
+												fill
+												style={{ objectFit: 'cover', borderRadius: '8px' }}
+											/>
+											<Icon
+												as={FaTimes}
+												fontSize={20}
+												pos={'absolute'}
+												right={2}
+												top={2}
+												cursor={'pointer'}
+												onClick={() => setFile(null)}
+											/>
+										</Box>
+									) : (
+										<Box>
+											<FileUploader
+												handleChange={handleChange}
+												name='file'
+												types={['JPG', 'PNG', 'GIF']}
+												style={{ minWidth: '100%' }}
+											/>
+											{errorFile && (
+												<Text mt={2} fontSize='14px' color='red.500'>
+													{errorFile}
+												</Text>
+											)}
+										</Box>
+									)}
 								</Stack>
 							</Box>
 						</Flex>

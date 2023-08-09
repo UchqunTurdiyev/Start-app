@@ -1,6 +1,7 @@
 import { InstructorManageCourse } from '@/components';
 import { SubmitValuesInterface } from '@/components/instructor-manage-course/instructor-manage-course.props';
 import SectionTitle from '@/components/section-title/section-title';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 import { Divider } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -8,6 +9,7 @@ import { useRouter } from 'next/router';
 import 'react-quill/dist/quill.snow.css';
 
 const EditDetailedCoursePageComponent = () => {
+	const { course } = useTypedSelector(state => state.instructor);
 	const router = useRouter();
 	const onSubmit = (data: SubmitValuesInterface) => {
 		console.log(data);
@@ -16,7 +18,7 @@ const EditDetailedCoursePageComponent = () => {
 		<>
 			<SectionTitle title={`Edit course ${router.query.slug}`} subtitle={''} />
 			<Divider mt={5} />
-			<InstructorManageCourse titleBtn='Edit course' submitHandler={onSubmit} />
+			<InstructorManageCourse titleBtn='Edit course' submitHandler={onSubmit} courseValues={course} />
 		</>
 	);
 };

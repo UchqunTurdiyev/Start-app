@@ -9,6 +9,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import { BsTrash } from 'react-icons/bs';
 import { HiOutlineStatusOnline } from 'react-icons/hi';
 import Image from 'next/image';
+import { loadImage } from '@/helper/image.helper';
 
 const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({ item }): JSX.Element => {
 	return (
@@ -42,7 +43,7 @@ const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({ item }): JSX.El
 					</HStack>
 				</Stack>
 				<Box w={'30%'} h={'300px'} position={'relative'}>
-					<Image fill src={item.image} alt={item.title} style={{ objectFit: 'cover', borderRadius: '10px' }} />
+					<Image fill src={loadImage(item.previewImage)} alt={item.title} style={{ objectFit: 'cover', borderRadius: '10px' }} />
 				</Box>
 			</HStack>
 		</>

@@ -1,6 +1,9 @@
+import { CourseType } from '@/interfaces/course.interfaces';
+
 export interface InstructorManageCourseProps {
 	titleBtn: string;
 	submitHandler: (data: SubmitValuesInterface) => void;
+	courseValues?: CourseType | null;
 }
 
 export interface SubmitValuesInterface {

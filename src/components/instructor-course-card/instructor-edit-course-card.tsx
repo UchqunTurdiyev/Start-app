@@ -10,6 +10,7 @@ import { HiOutlineStatusOnline } from 'react-icons/hi';
 import { SiGoogleanalytics } from 'react-icons/si';
 import { VscOpenPreview } from 'react-icons/vsc';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { loadImage } from '@/helper/image.helper';
 
 const InstructorEditCourseCard: FC<InstructorCoursesCardProps> = ({ item }): JSX.Element => {
 	const router = useRouter();
@@ -17,7 +18,7 @@ const InstructorEditCourseCard: FC<InstructorCoursesCardProps> = ({ item }): JSX
 		<HStack key={item.title} p={5} boxShadow={'dark-lg'} mt={5} borderRadius={'lg'}>
 			<Stack spacing={5}>
 				<Box pos={'relative'} w={'full'} h={'300px'}>
-					<Image fill src={item.image} style={{ objectFit: 'cover', borderRadius: '10px' }} alt={item.title} />
+					<Image fill src={loadImage(item.previewImage)} style={{ objectFit: 'cover', borderRadius: '10px' }} alt={item.title} />
 				</Box>
 				<Text fontSize={'20px'} color={'facebook.500'} fontWeight={'bold'}>
 					{item.level}

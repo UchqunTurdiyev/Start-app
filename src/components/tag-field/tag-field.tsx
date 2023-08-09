@@ -3,7 +3,7 @@ import React from 'react';
 import { TagsInput } from 'react-tag-input-component';
 import { TagFieldProps } from './tag-field.props';
 
-const TagField = ({ formik, label, name, placeholder, errorMessage }: TagFieldProps) => {
+const TagField = ({ formik, label, name, placeholder, errorMessage, values }: TagFieldProps) => {
 	return (
 		<Box w={'full'}>
 			<FormLabel>
@@ -12,12 +12,7 @@ const TagField = ({ formik, label, name, placeholder, errorMessage }: TagFieldPr
 					*
 				</Box>
 			</FormLabel>
-			<TagsInput
-				value={formik.values.name}
-				onChange={data => formik.setFieldValue(name, data)}
-				name={name}
-				placeHolder={placeholder}
-			/>
+			<TagsInput value={values} onChange={data => formik.setFieldValue(name, data)} name={name} placeHolder={placeholder} />
 			{errorMessage && (
 				<Text mt={2} fontSize={'14px'} color={'red.600'}>
 					{errorMessage}
