@@ -1,4 +1,3 @@
-import { SubmitValuesInterface } from '@/components/instructor-manage-course/instructor-manage-course.props';
 import * as Yup from 'yup';
 
 interface Type {

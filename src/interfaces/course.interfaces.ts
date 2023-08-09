@@ -10,13 +10,12 @@ export interface CourseType {
 	reviewCount: number;
 	author: AuthorType;
 	tags: string[];
-	requirement: string[];
+	requirements: string[];
 	learn: string[];
 	exerpt: string;
 	description: string;
 	category: string;
 }
-
 export interface AuthorType {
 	firstName: string;
 	lastName: string;

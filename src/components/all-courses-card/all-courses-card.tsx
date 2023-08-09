@@ -18,7 +18,7 @@ function AllCoursesCard({ course }: AllCoursesCardProps) {
 			<HStack py={4}>
 				<Flex gap={4} w={'100%'} direction={{ base: 'column', md: 'row' }}>
 					<Image
-						src={course.image}
+						src={course.previewImage}
 						alt={course.title}
 						w={{ base: '100%', md: '250px' }}
 						h={{ base: '300px', md: '250px' }}

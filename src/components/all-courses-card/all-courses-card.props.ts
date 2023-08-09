@@ -1,5 +1,5 @@
-import {CourseType} from "@/interfaces/course.interfaces";
+import { CourseType } from '@/interfaces/course.interfaces';
 
 export interface AllCoursesCardProps {
-    course: CourseType;
+	course: CourseType;
 }
