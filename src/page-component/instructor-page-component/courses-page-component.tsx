@@ -3,9 +3,11 @@ import { Card, CardBody, HStack, Stack, Tab, TabList, TabPanel, TabPanels, Tabs 
 import SectionTitle from '@/components/section-title/section-title';
 import Image from 'next/image';
 import { InstructorCoursesCard } from '@/components';
-import { courses } from '@/config/constants';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 const CoursesPageComponent = () => {
+	const { courses } = useTypedSelector(state => state.instructor);
+
 	return (
 		<>
 			<Card>
