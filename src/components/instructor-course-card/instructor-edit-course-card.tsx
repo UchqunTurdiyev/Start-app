@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { InstructorCoursesCardProps } from './instructor-courses-card.props';
-import { Box, Button, Divider, Flex, Heading, HStack, Icon, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Heading, HStack, Icon, Stack, Text, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { BsTrash } from 'react-icons/bs';
@@ -11,9 +11,27 @@ import { SiGoogleanalytics } from 'react-icons/si';
 import { VscOpenPreview } from 'react-icons/vsc';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { loadImage } from '@/helper/image.helper';
+import { useActions } from '@/hooks/useActions';
 
 const InstructorEditCourseCard: FC<InstructorCoursesCardProps> = ({ item }): JSX.Element => {
 	const router = useRouter();
+	const { deleteCourse } = useActions();
+	const toast = useToast();
+
+	const onDelete = () => {
+		const isAgree = confirm('Are you sure?');
+		if (isAgree) {
+			deleteCourse({
+				courseId: item._id,
+				callback: () => {
+					toast({ title: 'Successfully deleted', description: item.title, position: 'top-right', isClosable: true });
+					setTimeout(() => {
+						router.reload();
+					}, 1500);
+				},
+			});
+		}
+	};
 	return (
 		<HStack key={item.title} p={5} boxShadow={'dark-lg'} mt={5} borderRadius={'lg'}>
 			<Stack spacing={5}>
@@ -44,7 +62,9 @@ const InstructorEditCourseCard: FC<InstructorCoursesCardProps> = ({ item }): JSX
 					<Button rightIcon={<FiEdit2 />} onClick={() => router.push(`/instructor/edit-courses/${item.slug}`)}>
 						Edit
 					</Button>
-					<Button rightIcon={<BsTrash />}>Delete</Button>
+					<Button rightIcon={<BsTrash />} onClick={onDelete}>
+						Delete
+					</Button>
 					<Button rightIcon={<HiOutlineStatusOnline />}>Status</Button>
 				</HStack>
 			</Stack>
