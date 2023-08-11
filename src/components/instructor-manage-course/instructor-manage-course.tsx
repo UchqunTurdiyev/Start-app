@@ -21,6 +21,7 @@ import { FileService } from '@/servises/file.service';
 import { editorModules } from '@/config/editor.config';
 import { courseCategory, courseLevel, coursePrice } from '@/config/constants';
 import { loadImage } from '@/helper/image.helper';
+import { CourseType } from '@/interfaces/course.interfaces';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -42,11 +43,15 @@ const InstructorManageCourse = ({ submitHandler, titleBtn, courseValues }: Instr
 			setErrorFile('Preview image is required');
 			return;
 		}
-		const formData = new FormData();
-		formData.append('image', file as File);
-		startLoading();
-		const response = await FileService.fileUpload(formData, 'preview-image');
-		const data = { ...formValues, previewImage: response.url } as SubmitValuesInterface;
+		let imageUrl = file;
+		if (typeof file !== 'string') {
+			const formData = new FormData();
+			formData.append('image', file as File);
+			startLoading();
+			const response = await FileService.fileUpload(formData, 'preview-image');
+			imageUrl = response.url;
+		}
+		const data = { ...formValues, previewImage: imageUrl } as CourseType;
 		submitHandler(data);
 	};
 

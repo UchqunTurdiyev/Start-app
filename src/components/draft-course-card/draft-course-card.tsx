@@ -15,7 +15,7 @@ const DraftCourseCard: FC<DraftCourseCardProps> = ({ item, status }): JSX.Elemen
 			boxShadow={'dark-lg'}
 		>
 			<Box pos={'relative'} w={'100%'} h={'200px'}>
-				<Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover', borderRadius: '10px' }} />
+				<Image src={item.previewImage} alt={item.title} fill style={{ objectFit: 'cover', borderRadius: '10px' }} />
 			</Box>
 			<Divider my={6} />
 			<Stack spacing={5}>
